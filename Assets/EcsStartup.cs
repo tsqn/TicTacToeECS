@@ -1,26 +1,33 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
+using Leopotam.EcsLite.UnityEditor;
 using Systems;
-using Unity.VisualScripting;
 using UnityEngine;
 
-sealed class EcsStartup : MonoBehaviour {
-    EcsWorld _world;
-    EcsSystems _systems;
+internal sealed class EcsStartup : MonoBehaviour
+{
     public Configuration Configuration;
     public SceneData SceneData;
-    void Start () {
-        // void can be switched to IEnumerator for support coroutines.
-            
-        _world = new EcsWorld ();
-        _systems = new EcsSystems (_world);
-#if UNITY_EDITOR
-        Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create (_world);
-        Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create (_systems);
-#endif
+    private EcsSystems _systems;
+    private EcsWorld _world;
+    private EcsSystems _editorSystems;
 
-        var gameState = new GameState();
-        
+    private void Start()
+    {
+        // void can be switched to IEnumerator for support coroutines.
+
+        var sharedData = new SharedData
+        {
+            Configuration = Configuration,
+            GameState = new GameState(),
+            SceneData = SceneData
+        };
+        _world = new EcsWorld();
+        _systems = new EcsSystems(_world, sharedData);
+
+
+        EditorSystemsInit();
+
         _systems
             .Add(new InitializeFieldSystem())
             .Add(new CreateCellViewSystem())
@@ -31,24 +38,37 @@ sealed class EcsStartup : MonoBehaviour {
             .Add(new CheckWinSystem())
             .Add(new WinSystem())
             .Add(new DrawSystem())
-            .OneFrame<UpdateCameraEvent>()
-            .OneFrame<Clicked>()
-            .OneFrame<CheckWinEvent>()
-            .Inject(gameState)
-            .Inject(Configuration)
-            .Inject(SceneData)
-            .Init ();
+            .Init();
+        
+    }
+    
+    private void EditorSystemsInit()
+    {
+#if UNITY_EDITOR
+        // create separate EcsSystems group for editor systems only.
+        _editorSystems = new EcsSystems(_world);
+        _editorSystems
+            .Add(new EcsWorldDebugSystem())
+            .Init();
+#endif
     }
 
-    void Update () {
-        _systems?.Run ();
+    private void Update()
+    {
+        _systems?.Run();
+        
+#if UNITY_EDITOR
+        _editorSystems.Run();
+#endif
     }
 
-    void OnDestroy () {
-        if (_systems != null) {
-            _systems.Destroy ();
+    private void OnDestroy()
+    {
+        if (_systems != null)
+        {
+            _systems.Destroy();
             _systems = null;
-            _world.Destroy ();
+            _world.Destroy();
             _world = null;
         }
     }

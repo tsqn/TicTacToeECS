@@ -1,29 +1,36 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Systems
 {
     internal class CreateCellViewSystem : IEcsRunSystem
     {
-        private EcsFilter<Cell, Position>.Exclude<CellViewRef> _filter;
-
-        private Configuration _configuration;
-
-        public void Run()
+        public void Run(EcsSystems systems)
         {
-            foreach (var index in _filter)
+            var world = systems.GetWorld();
+
+            var sharedData = systems.GetShared<SharedData>();
+            var configuration = sharedData.Configuration;
+
+            var filter = world.Filter<Cell>().Inc<Position>().Exc<CellViewRef>().End();
+
+            var positions = world.GetPool<Position>();
+            var cellViewRefs = world.GetPool<CellViewRef>();
+
+            foreach (var index in filter)
             {
-                ref var position = ref _filter.Get2(index);
+                ref var position = ref positions.Get(index);
 
-                var cellView = Object.Instantiate(_configuration.CellView);
+                var cellView = Object.Instantiate(configuration.CellView);
 
-                cellView.transform.position = new Vector3(position.Value.x + _configuration.Offset.x * position.Value.x,
-                    position.Value.y + _configuration.Offset.y * position.Value.y);
+                cellView.transform.position = new Vector3(position.Value.x + configuration.Offset.x * position.Value.x,
+                    position.Value.y + configuration.Offset.y * position.Value.y);
 
-                cellView.Entity = _filter.GetEntity(index);
-                
-                _filter.GetEntity(index).Get<CellViewRef>().View = cellView;
+                cellView.Entity = index;
+
+                ref var cellViewRef = ref cellViewRefs.Add(index);
+                cellViewRef.View = cellView;
             }
         }
     }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using NUnit.Framework;
 using Systems;
 using UnityEngine;
@@ -15,7 +15,7 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
-        var chainLenght = cells.GetLongestChain(Vector2Int.zero);
+        var chainLenght = cells.GetLongestChain(world,Vector2Int.zero);
 
         Assert.AreEqual(0, chainLenght);
     }
@@ -28,9 +28,10 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
-        cells[Vector2Int.zero].Get<Taken>().value = SignType.Cross;
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[Vector2Int.zero]).value = SignType.Cross;
 
-        var chainLenght = cells.GetLongestChain(Vector2Int.zero);
+        var chainLenght = cells.GetLongestChain(world,Vector2Int.zero);
 
         Assert.AreEqual(1, chainLenght);
     }
@@ -43,11 +44,11 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[new Vector2Int(2, 0)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(1, 0)]).value = SignType.Cross;
 
-        cells[new Vector2Int(2, 0)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(1, 0)].Get<Taken>().value = SignType.Cross;
-
-        var chainLenght = cells.GetLongestChain(new Vector2Int(2, 0));
+        var chainLenght = cells.GetLongestChain(world,new Vector2Int(2, 0));
 
 
         Assert.AreEqual(2, chainLenght);
@@ -60,15 +61,16 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
-        cells[new Vector2Int(2, 0)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(1, 0)].Get<Taken>().value = SignType.Cross;
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[new Vector2Int(2, 0)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(1, 0)]).value = SignType.Cross;
 
-        var chainLenght = cells.GetLongestChain(new Vector2Int(1, 0));
+        var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 0));
 
 
         Assert.AreEqual(2, chainLenght);
     }
-    
+
     [Test]
     public void CheckVerticalChainThree()
     {
@@ -76,16 +78,17 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
-        cells[new Vector2Int(0, 2)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(0, 1)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(0, 0)].Get<Taken>().value = SignType.Cross;
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[new Vector2Int(0, 2)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(0, 1)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(0, 0)]).value = SignType.Cross;
 
-        var chainLenght = cells.GetLongestChain(new Vector2Int(0, 1));
+        var chainLenght = cells.GetLongestChain(world,new Vector2Int(0, 1));
 
 
         Assert.AreEqual(3, chainLenght);
     }
-    
+
     [Test]
     public void CheckFirstDiagonalChainThree()
     {
@@ -93,36 +96,37 @@ public class GameLoginTests
 
         var cells = CreateTestCells(world);
 
-        cells[new Vector2Int(2, 2)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(1, 1)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(0, 0)].Get<Taken>().value = SignType.Cross;
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[new Vector2Int(2, 2)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(1, 1)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(0, 0)]).value = SignType.Cross;
 
-        var chainLenght = cells.GetLongestChain(new Vector2Int(1, 1));
+        var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 1));
 
 
         Assert.AreEqual(3, chainLenght);
     }
-    
+
     [Test]
     public void CheckSecondDiagonalChainThreeOne()
     {
         var world = new EcsWorld();
 
         var cells = CreateTestCells(world);
+        var takenPool = world.GetPool<Taken>();
+        takenPool.Add(cells[new Vector2Int(2, 0)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(1, 1)]).value = SignType.Cross;
+        takenPool.Add(cells[new Vector2Int(0, 2)]).value = SignType.Cross;
 
-        cells[new Vector2Int(2, 0)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(1, 1)].Get<Taken>().value = SignType.Cross;
-        cells[new Vector2Int(0, 2)].Get<Taken>().value = SignType.Cross;
-
-        var chainLenght = cells.GetLongestChain(new Vector2Int(1, 1));
+        var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 1));
 
 
         Assert.AreEqual(3, chainLenght);
     }
 
-    private static Dictionary<Vector2Int, EcsEntity> CreateTestCells(EcsWorld world)
+    private static Dictionary<Vector2Int, int> CreateTestCells(EcsWorld world)
     {
-        return new Dictionary<Vector2Int, EcsEntity>
+        return new Dictionary<Vector2Int, int>
         {
             {new Vector2Int(0, 0), CreateCell(world, new Vector2Int(0, 0))},
             {new Vector2Int(0, 1), CreateCell(world, new Vector2Int(0, 1))},
@@ -136,12 +140,18 @@ public class GameLoginTests
         };
     }
 
-    private static EcsEntity CreateCell(EcsWorld world, Vector2Int position)
+    private static int CreateCell(EcsWorld world, Vector2Int position)
     {
-        var entity = world.NewEntity();
-        entity.Get<Position>().Value = position;
-        entity.Get<Cell>();
+        var id = world.NewEntity();
 
-        return entity;
+        var positionPool = world.GetPool<Position>();
+        var cellPool = world.GetPool<Cell>();
+
+        ref var positionComponent = ref positionPool.Add(id);
+        positionComponent.Value = position;
+
+        cellPool.Add(id);
+
+        return id;
     }
 }

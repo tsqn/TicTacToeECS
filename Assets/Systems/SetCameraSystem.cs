@@ -1,28 +1,37 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Systems
 {
     internal class SetCameraSystem : IEcsRunSystem
     {
-        private EcsFilter<UpdateCameraEvent> _filter;
-        private Configuration _configuration;
-        private SceneData _sceneData;
-        
-        public void Run()
+        public void Run(EcsSystems systems)
         {
-            if (!_filter.IsEmpty())
-            {
-                var height = _configuration.LevelHeight;
-                
-                var camera = _sceneData.Camera;
-                camera.orthographic = true;
-                camera.orthographicSize = height / 1.5f + (height - 1) * _configuration.Offset.y / 1.5f;
+            
+            var sharedData = systems.GetShared<SharedData>();
+            var sceneData = sharedData.SceneData;
+            var configuration = sharedData.Configuration;
+            
+            var world = systems.GetWorld();
 
-                _sceneData.CameraTransform.position = new Vector3(
-                    _configuration.LevelWidth / 2f + (_configuration.LevelWidth - 1) * _configuration.Offset.y / 2,
-                    _configuration.LevelHeight / 2f + (_configuration.LevelHeight - 1) * _configuration.Offset.y / 2, -1);
+            var cellsFilter = world.Filter<UpdateCameraEvent>().End();
+            var updateCameraEvents = world.GetPool<UpdateCameraEvent>();
+
+            foreach (var id in cellsFilter)
+            {
+                var height = configuration.LevelHeight;
+
+                var camera = sceneData.Camera;
+                camera.orthographic = true;
+                camera.orthographicSize = height / 1.5f + (height - 1) * configuration.Offset.y / 1.5f;
+
+                sceneData.CameraTransform.position = new Vector3(
+                    configuration.LevelWidth / 2f + (configuration.LevelWidth - 1) * configuration.Offset.y / 2,
+                    configuration.LevelHeight / 2f + (configuration.LevelHeight - 1) * configuration.Offset.y / 2,
+                    -1);
+                
+                updateCameraEvents.Del(id);
             }
         }
     }

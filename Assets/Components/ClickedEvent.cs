@@ -1,6 +1,6 @@
 namespace Components
 {
-    public struct Clicked
+    public struct ClickedEvent
     {
     }
 }

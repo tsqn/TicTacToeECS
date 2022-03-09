@@ -1,33 +1,39 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 
 namespace Systems
 {
     public class CheckWinSystem : IEcsRunSystem
     {
-        private EcsFilter<Position, Taken, CheckWinEvent> _filter;
-        private GameState _gameState;
-        private Configuration _configuration;
-
-        public void Run()
+        public void Run(EcsSystems systems)
         {
+            var world = systems.GetWorld();
+            
+            var sharedData = systems.GetShared<SharedData>();
+            var configuration = sharedData.Configuration;
+            var gameState = sharedData.GameState;
+            
+            var filter = world.Filter<Position>().Inc<Taken>().Inc<CheckWinEvent>().End();
 
-            foreach (var index in _filter)
+            var positions = world.GetPool<Position>();
+            var winner = world.GetPool<Winner>();
+            var eventPool = world.GetPool<CheckWinEvent>();
+
+            foreach (var id in filter)
             {
-                ref var position = ref _filter.Get1(index);
+                ref var position = ref positions.Get(id);
 
-                var chainLenght = _gameState.Cells.GetLongestChain(position.Value);
+                var chainLength = gameState.Cells.GetLongestChain(world, position.Value);
 
-                if (chainLenght >= _configuration.ChainLength)
+                if (chainLength >= configuration.ChainLength)
                 {
-                    _filter.GetEntity(index).Get<Winner>();
+                    winner.Add(id);
                 }
+                
+                eventPool.Del(id);
             }
             
-            if (!_filter.IsEmpty())
-            {
-                
-            }
+
         }
     }
 }

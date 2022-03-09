@@ -1,22 +1,34 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 
 namespace Systems
 {
     public class AnalyzeClickSystem : IEcsRunSystem
     {
-
-        private EcsFilter<Cell, Clicked>.Exclude<Taken> _filter;
-        private GameState _gameState;
-
-        public void Run()
+        public void Run(EcsSystems systems)
         {
-            foreach (var index in _filter)
-            {
-                _filter.GetEntity(index).Get<Taken>().value = _gameState.CurrentSign;
-                _filter.GetEntity(index).Get<CheckWinEvent>();
+            var world = systems.GetWorld();
 
-                _gameState.CurrentSign = _gameState.CurrentSign == SignType.Cross ? SignType.Ring : SignType.Cross;
+            var sharedData = systems.GetShared<SharedData>();
+            var gameState = sharedData.GameState;
+
+            var filter = world.Filter<Cell>().Inc<ClickedEvent>().Exc<Taken>().End();
+
+            var takenPool = world.GetPool<Taken>();
+            var checkWinEventPool = world.GetPool<CheckWinEvent>();
+            var clickedEventPool = world.GetPool<ClickedEvent>();
+
+            foreach (var id in filter)
+            {
+                ref var takenCell = ref takenPool.Add(id);
+
+                takenCell.value = gameState.CurrentSign;
+
+                gameState.CurrentSign = gameState.CurrentSign == SignType.Cross ? SignType.Ring : SignType.Cross;
+
+                checkWinEventPool.Add(id);
+                clickedEventPool.Del(id);
+                
             }
         }
     }

@@ -1,5 +1,5 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Systems
@@ -7,12 +7,15 @@ namespace Systems
     internal class ControlSystem : IEcsRunSystem
     {
         private SceneData _sceneData;
-        
-        public void Run()
+
+        public void Run(EcsSystems systems)
         {
+            var sharedData = systems.GetShared<SharedData>();
+            var sceneData = sharedData.SceneData;
+            
             if (Input.GetMouseButtonDown(0))
             {
-                var camera = _sceneData.Camera;
+                var camera = sceneData.Camera;
 
                 var ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -22,7 +25,14 @@ namespace Systems
 
                     if (cellView)
                     {
-                        cellView.Entity.Get<Clicked>();
+                        var world = systems.GetWorld();
+                        var clickedPool = world.GetPool<ClickedEvent>();
+                        var takenPool = world.GetPool<Taken>();
+
+                        if (!takenPool.Has(cellView.Entity))
+                        {
+                            clickedPool.Add(cellView.Entity);
+                        }
                     }
                 }
             }

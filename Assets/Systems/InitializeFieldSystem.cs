@@ -1,32 +1,39 @@
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Systems
 {
     internal class InitializeFieldSystem : IEcsInitSystem
     {
-        private Configuration _configuration;
-
-        private EcsWorld _world;
-        private GameState _gameState;
-
-        public void Init()
+        public void Init(EcsSystems systems)
         {
-            for (int x = 0; x < _configuration.LevelWidth; x++)
-            {
-                for (int y = 0; y < _configuration.LevelHeight; y++)
-                {
-                    var cellEntity = _world.NewEntity();
-                    cellEntity.Get<Cell>();
-                    var position = new Vector2Int(x, y);
-                    cellEntity.Get<Position>().Value = position;
-                    _gameState.Cells[position] = cellEntity;
+            var world = systems.GetWorld();
+            
+            var sharedData = systems.GetShared<SharedData>();
+            var configuration = sharedData.Configuration;
+            var gameState = sharedData.GameState;
+            
+            var cellComponents = world.GetPool<Cell>();
+            var positionComponents = world.GetPool<Position>();
 
+            for (var x = 0; x < configuration.LevelWidth; x++)
+            {
+                for (var y = 0; y < configuration.LevelHeight; y++)
+                {
+                    var newCell = world.NewEntity();
+
+                    cellComponents.Add(newCell);
+                    ref var position = ref positionComponents.Add(newCell);
+                    position.Value = new Vector2Int(x, y);
+
+
+                    gameState.Cells[position.Value] = newCell;
                 }
             }
 
-            _world.NewEntity().Get<UpdateCameraEvent>();
+            var eventPool = world.GetPool<UpdateCameraEvent>();
+            eventPool.Add( world.NewEntity());
         }
     }
 }

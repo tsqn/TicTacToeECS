@@ -1,10 +1,9 @@
-using Leopotam.Ecs;
 using UnityEngine;
 
 namespace Components
 {
     public class CellView : MonoBehaviour
     {
-        public EcsEntity Entity { get; set; }
+        public int Entity { get; set; }
     }
 }

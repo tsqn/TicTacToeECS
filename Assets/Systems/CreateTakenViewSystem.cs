@@ -1,41 +1,52 @@
 ﻿using System;
 using Components;
-using Leopotam.Ecs;
+using Leopotam.EcsLite;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Systems
 {
-    public class  CreateTakenViewSystem : IEcsRunSystem
+    public class CreateTakenViewSystem : IEcsRunSystem
     {
-        private EcsFilter<Taken, CellViewRef>.Exclude<TakenViewRef> _filter;
-        private Configuration _configuration;
-        public void Run()
+        public void Run(EcsSystems systems)
         {
-            foreach (var index in _filter)
+            var world = systems.GetWorld();
+
+            var sharedData = systems.GetShared<SharedData>();
+            var configuration = sharedData.Configuration;
+
+            
+            var filter = world.Filter<Taken>().Inc<CellViewRef>().Exc<TakenViewRef>().End();
+
+            var takenCells = world.GetPool<Taken>();
+            var cellViewRefs = world.GetPool<CellViewRef>();
+            var takenViewRefs = world.GetPool<TakenViewRef>();
+
+            foreach (var id in filter)
             {
-                var position = _filter.Get2(index).View.transform.position;
-                var takenType = _filter.Get1(index).value;
+                ref var cellViewRef = ref cellViewRefs.Get(id);
+                var position = cellViewRef.View.transform.position;
+                ref var takenComponent = ref takenCells.Get(id);
+                var taken = takenComponent.value;
 
                 SignView sigView = null;
-
-                switch (takenType)
+                switch (taken)
                 {
                     case SignType.None:
                         break;
                     case SignType.Cross:
-                        sigView = _configuration.CrossView;
+                        sigView = configuration.CrossView;
                         break;
                     case SignType.Ring:
-                        sigView = _configuration.RingView;
+                        sigView = configuration.RingView;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                
-                var instance = Object.Instantiate(sigView, position, Quaternion.identity);
-                _filter.GetEntity(index).Get<TakenViewRef>().View = instance;
 
+                var instance = Object.Instantiate(sigView, position, Quaternion.identity);
+                ref var takenViewRef = ref takenViewRefs.Add(id);
+                takenViewRef.View = instance;
             }
         }
     }
