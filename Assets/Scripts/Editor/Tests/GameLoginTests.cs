@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Numerics;
+using Core;
 using Leopotam.EcsLite;
+using Logic.Components;
+using Logic.Extensions;
 using NUnit.Framework;
-using TicTacToe.Components;
-using TicTacToe.Extensions;
-using UnityEngine;
 
 namespace TicTacToe.Editor.Tests
 {
@@ -17,7 +18,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var chainLenght = cells.GetLongestChain(world,Vector2Int.zero);
+            var chainLenght = cells.GetLongestChain(world,Vector2.Zero);
 
             Assert.AreEqual(0, chainLenght);
         }
@@ -31,9 +32,9 @@ namespace TicTacToe.Editor.Tests
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[Vector2Int.zero]).Type = SignType.Cross;
+            takenPool.Add(cells[Vector2.Zero]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,Vector2Int.zero);
+            var chainLenght = cells.GetLongestChain(world,Vector2.Zero);
 
             Assert.AreEqual(1, chainLenght);
         }
@@ -47,10 +48,10 @@ namespace TicTacToe.Editor.Tests
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[new Vector2Int(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(1, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2Int(2, 0));
+            var chainLenght = cells.GetLongestChain(world,new Vector2(2, 0));
 
 
             Assert.AreEqual(2, chainLenght);
@@ -64,10 +65,10 @@ namespace TicTacToe.Editor.Tests
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[new Vector2Int(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(1, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 0));
+            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 0));
 
 
             Assert.AreEqual(2, chainLenght);
@@ -81,11 +82,11 @@ namespace TicTacToe.Editor.Tests
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[new Vector2Int(0, 2)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(0, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(0, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(0, 1)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2Int(0, 1));
+            var chainLenght = cells.GetLongestChain(world,new Vector2(0, 1));
 
 
             Assert.AreEqual(3, chainLenght);
@@ -99,11 +100,11 @@ namespace TicTacToe.Editor.Tests
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[new Vector2Int(2, 2)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(1, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(0, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(2, 2)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 1));
+            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 1));
 
 
             Assert.AreEqual(3, chainLenght);
@@ -116,33 +117,33 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
             var takenPool = world.GetPool<Taken>();
-            takenPool.Add(cells[new Vector2Int(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(1, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2Int(0, 2)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
+            takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2Int(1, 1));
+            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 1));
 
 
             Assert.AreEqual(3, chainLenght);
         }
 
-        private static Dictionary<Vector2Int, int> CreateTestCells(EcsWorld world)
+        private static Dictionary<Vector2, int> CreateTestCells(EcsWorld world)
         {
-            return new Dictionary<Vector2Int, int>
+            return new Dictionary<Vector2, int>
             {
-                {new Vector2Int(0, 0), CreateCell(world, new Vector2Int(0, 0))},
-                {new Vector2Int(0, 1), CreateCell(world, new Vector2Int(0, 1))},
-                {new Vector2Int(0, 2), CreateCell(world, new Vector2Int(0, 2))},
-                {new Vector2Int(1, 0), CreateCell(world, new Vector2Int(1, 0))},
-                {new Vector2Int(1, 1), CreateCell(world, new Vector2Int(1, 1))},
-                {new Vector2Int(1, 2), CreateCell(world, new Vector2Int(1, 2))},
-                {new Vector2Int(2, 0), CreateCell(world, new Vector2Int(2, 0))},
-                {new Vector2Int(2, 1), CreateCell(world, new Vector2Int(2, 1))},
-                {new Vector2Int(2, 2), CreateCell(world, new Vector2Int(2, 2))}
+                {new Vector2(0, 0), CreateCell(world, new Vector2(0, 0))},
+                {new Vector2(0, 1), CreateCell(world, new Vector2(0, 1))},
+                {new Vector2(0, 2), CreateCell(world, new Vector2(0, 2))},
+                {new Vector2(1, 0), CreateCell(world, new Vector2(1, 0))},
+                {new Vector2(1, 1), CreateCell(world, new Vector2(1, 1))},
+                {new Vector2(1, 2), CreateCell(world, new Vector2(1, 2))},
+                {new Vector2(2, 0), CreateCell(world, new Vector2(2, 0))},
+                {new Vector2(2, 1), CreateCell(world, new Vector2(2, 1))},
+                {new Vector2(2, 2), CreateCell(world, new Vector2(2, 2))}
             };
         }
 
-        private static int CreateCell(EcsWorld world, Vector2Int position)
+        private static int CreateCell(EcsWorld world, Vector2 position)
         {
             var id = world.NewEntity();
 

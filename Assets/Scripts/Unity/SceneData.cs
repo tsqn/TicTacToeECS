@@ -1,11 +1,19 @@
+using Interfaces;
+using Unity.Wrappers;
 using UnityEngine;
 
-namespace TicTacToe.Unity
+namespace Unity
 {
-    public class SceneData : MonoBehaviour
+    public class SceneData : MonoBehaviour, ISceneData
     {
-        public Transform CameraTransform;
-        public Camera Camera;
-        public UI UI;
+        [SerializeField] 
+        private CameraDecorator _camera;
+
+        [SerializeField] 
+        private UIDecorator _ui;
+
+        public ITransform CameraTransform => _camera ;
+        public ICamera Camera => _camera;
+        public IUI UI => _ui;
     }
 }

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28263f99c96349f5b4692cbddf1f0bcc, type: 3}
   m_Name: Configuration
   m_EditorClassIdentifier: 
-  LevelWidth: 3
-  LevelHeight: 3
-  ChainLength: 3
-  CellView: {fileID: 8367525698233398064, guid: d8f297359623b90408459a034dce90fc,
+  _levelWidth: 3
+  _levelHeight: 3
+  _chainLength: 3
+  _cellView: {fileID: 8367525698233398064, guid: d8f297359623b90408459a034dce90fc,
     type: 3}
-  Offset: {x: 1.5, y: 1.5}
-  CrossView: {fileID: 6406968528980823600, guid: 5cd352a3688dfce44912026c8b95a0e8,
+  _offset: {x: 1.5, y: 1.5}
+  _crossView: {fileID: 6406968528980823600, guid: 5cd352a3688dfce44912026c8b95a0e8,
     type: 3}
-  RingView: {fileID: 1642777615243598748, guid: 8cccf76b45e905e45aa380f5f0a60a9d,
+  _ringView: {fileID: 1642777615243598748, guid: 8cccf76b45e905e45aa380f5f0a60a9d,
     type: 3}

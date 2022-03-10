@@ -1,11 +1,15 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Core;
+using Interfaces;
+using Vector2 = System.Numerics.Vector2;
 
-namespace TicTacToe.Unity
+namespace Unity
 {
-    public class GameState
+    public class GameState : IGameState
     {
-        public readonly Dictionary<Vector2Int, int> Cells = new();
-        public SignType CurrentSign = SignType.Ring;
+        private readonly Dictionary<Vector2, int> _cells = new();
+
+        public SignType CurrentSign { get; set; } = SignType.Ring;
+        public Dictionary<Vector2 , int> Cells => _cells;
     }
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Interfaces;
+using Unity.Wrappers;
 
-namespace TicTacToe.Unity.Views
+namespace Unity.Views
 {
-    public class SignView : MonoBehaviour
+    public class SignView : MonoDecorator, ISignView
     {
     }
 }

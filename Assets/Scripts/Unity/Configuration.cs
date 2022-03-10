@@ -1,17 +1,33 @@
-using TicTacToe.Unity.Views;
+using Interfaces;
+using Unity.Extensions;
+using Unity.Views;
 using UnityEngine;
 
-namespace TicTacToe.Unity
+namespace Unity
 {
     [CreateAssetMenu]
-    public class Configuration : ScriptableObject
+    public class Configuration : ScriptableObject, IConfiguration
     {
-        public int LevelWidth = 3;
-        public int LevelHeight = 3;
-        public int ChainLength = 3;
-        public CellView CellView;
-        public Vector2 Offset;
-        public SignView CrossView;
-        public SignView RingView;
+        [SerializeField] private int _levelWidth = 3;
+
+        [SerializeField] private int _levelHeight = 3;
+
+        [SerializeField] private int _chainLength = 3;
+
+        [SerializeField] private CellView _cellView;
+
+        [SerializeField] private Vector2 _offset;
+
+        [SerializeField] private SignView _crossView;
+
+        [SerializeField] private SignView _ringView;
+
+        public ICellView CellView => _cellView;
+        public System.Numerics.Vector2 Offset => _offset.Convert();
+        public int LevelWidth => _levelWidth;
+        public int LevelHeight => _levelHeight;
+        public int ChainLength => _chainLength;
+        public ISignView CrossView => _crossView;
+        public ISignView RingView => _ringView;
     }
 }

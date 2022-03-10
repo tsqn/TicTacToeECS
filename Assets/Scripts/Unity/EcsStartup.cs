@@ -1,9 +1,10 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.UnityEditor;
-using TicTacToe.Systems;
+using Logic.Systems;
+using Unity.Wrappers;
 using UnityEngine;
 
-namespace TicTacToe.Unity
+namespace Unity
 {
     internal sealed class EcsStartup : MonoBehaviour
     {
@@ -15,13 +16,13 @@ namespace TicTacToe.Unity
 
         private void Start()
         {
-            // void can be switched to IEnumerator for support coroutines.
-
             var sharedData = new SharedData
             {
                 Configuration = Configuration,
                 GameState = new GameState(),
-                SceneData = SceneData
+                SceneData = SceneData,
+                Input = new InputDecorator(),
+                Physics = new PhysicsDecorator()
             };
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, sharedData);

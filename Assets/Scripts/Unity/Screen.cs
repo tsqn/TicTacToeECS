@@ -1,8 +1,9 @@
+using Interfaces;
 using UnityEngine;
 
-namespace TicTacToe.Unity
+namespace Unity
 {
-    public class Screen : MonoBehaviour
+    public class Screen : MonoBehaviour, IScreen
     {
         public void Show(bool state)
         {
