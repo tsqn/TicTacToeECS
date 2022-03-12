@@ -1,7 +1,7 @@
-﻿using Interfaces;
-using Unity.Wrappers;
+﻿using TicTacToe.Interfaces;
+using TicTacToe.Unity.Wrappers;
 
-namespace Unity.Views
+namespace TicTacToe.Unity.Views
 {
     public class SignView : MonoDecorator, ISignView
     {

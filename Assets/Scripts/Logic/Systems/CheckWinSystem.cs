@@ -1,10 +1,10 @@
-using Interfaces;
 using Leopotam.EcsLite;
-using Logic.Components;
-using Logic.Components.Events;
-using Logic.Extensions;
+using TicTacToe.Interfaces;
+using TicTacToe.Logic.Components;
+using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Extensions;
 
-namespace Logic.Systems
+namespace TicTacToe.Logic.Systems
 {
     public class CheckWinSystem : IEcsRunSystem
     {

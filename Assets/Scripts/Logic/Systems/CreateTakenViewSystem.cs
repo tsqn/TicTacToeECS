@@ -1,11 +1,11 @@
 ﻿using System;
-using Core;
-using Interfaces;
 using Leopotam.EcsLite;
-using Logic.Components;
-using Logic.Components.Refs;
+using TicTacToe.Core;
+using TicTacToe.Interfaces;
+using TicTacToe.Logic.Components;
+using TicTacToe.Logic.Components.Refs;
 
-namespace Logic.Systems
+namespace TicTacToe.Logic.Systems
 {
     public class CreateTakenViewSystem : IEcsRunSystem
     {

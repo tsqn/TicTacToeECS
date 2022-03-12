@@ -1,6 +1,6 @@
 {
     "name": "Interfaces",
-    "rootNamespace": "",
+    "rootNamespace": "TicTacToe",
     "references": [
         "GUID:648c9d83bae324c48ba728ca122a4fae"
     ],

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using Core;
 using Leopotam.EcsLite;
-using Logic.Components;
+using TicTacToe.Core;
+using TicTacToe.Logic.Components;
 
-namespace Logic.Extensions
+namespace TicTacToe.Logic.Extensions
 {
     public static class CellsExtensions
     {

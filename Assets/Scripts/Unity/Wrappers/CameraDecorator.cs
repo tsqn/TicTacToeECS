@@ -1,8 +1,8 @@
-﻿using Interfaces;
-using Unity.Extensions;
+﻿using TicTacToe.Interfaces;
+using TicTacToe.Unity.Extensions;
 using UnityEngine;
 
-namespace Unity.Wrappers
+namespace TicTacToe.Unity.Wrappers
 {
     public class CameraDecorator : MonoDecorator, ICamera
     {
@@ -28,11 +28,6 @@ namespace Unity.Wrappers
         public IRay ScreenPointToRay(System.Numerics.Vector3 mousePosition)
         {
             return new RayDecorator(_camera.ScreenPointToRay(mousePosition.Convert()));
-        }
-
-        public Ray ScreenPointToRay(Vector3 mousePosition)
-        {
-            return _camera.ScreenPointToRay(mousePosition);
         }
     }
 

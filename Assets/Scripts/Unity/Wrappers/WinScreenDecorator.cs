@@ -1,18 +1,20 @@
 ﻿using System;
-using Core;
-using Interfaces;
+using TicTacToe.Core;
+using TicTacToe.Interfaces;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Unity.Wrappers
+namespace TicTacToe.Unity.Wrappers
 {
     public class WinScreenDecorator : Screen, IWinScreen
     {
-        public Text Text;
+        [SerializeField]
+        public Text _text;
 
         public void SetWinner(SignType winnerType)
         {
-            Text.text = winnerType switch
+            _text.text = winnerType switch
             {
                 SignType.None => "Draw",
                 SignType.Cross => "Cross wins",

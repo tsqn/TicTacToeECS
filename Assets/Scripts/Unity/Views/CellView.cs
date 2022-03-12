@@ -1,8 +1,8 @@
-using Interfaces;
-using Unity.Wrappers;
+using TicTacToe.Interfaces;
+using TicTacToe.Unity.Wrappers;
 using UnityEngine;
 
-namespace Unity.Views
+namespace TicTacToe.Unity.Views
 {
     public class CellView : MonoDecorator, ICellView
     {

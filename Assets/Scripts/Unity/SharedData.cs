@@ -1,6 +1,6 @@
-﻿using Interfaces;
+﻿using TicTacToe.Interfaces;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     public class SharedData : ISharedData
     {

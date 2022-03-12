@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Logic.Components
+namespace TicTacToe.Logic.Components
 {
     public struct Position
     {

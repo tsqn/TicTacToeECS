@@ -1,7 +1,7 @@
-using Interfaces;
+using TicTacToe.Interfaces;
 using UnityEngine;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     public class Screen : MonoBehaviour, IScreen
     {

@@ -1,4 +1,4 @@
-namespace Logic.Components
+namespace TicTacToe.Logic.Components
 {
     public struct Winner
     {

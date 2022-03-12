@@ -1,6 +1,6 @@
 {
     "name": "Core",
-    "rootNamespace": "",
+    "rootNamespace": "TicTacToe",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

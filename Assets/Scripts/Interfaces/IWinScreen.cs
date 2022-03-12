@@ -1,6 +1,6 @@
-﻿using Core;
+﻿using TicTacToe.Core;
 
-namespace Interfaces
+namespace TicTacToe.Interfaces
 {
     public interface IWinScreen : IScreen
     {

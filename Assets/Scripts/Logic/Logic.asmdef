@@ -1,6 +1,6 @@
 {
     "name": "Logic",
-    "rootNamespace": "",
+    "rootNamespace": "TicTacToe",
     "references": [
         "GUID:648c9d83bae324c48ba728ca122a4fae",
         "GUID:e59bf9fc7d5a44b18a819a92edd46163",

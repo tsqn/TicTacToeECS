@@ -1,9 +1,9 @@
-﻿using Core;
-using Interfaces;
-using Leopotam.EcsLite;
-using Logic.Components;
+﻿using Leopotam.EcsLite;
+using TicTacToe.Core;
+using TicTacToe.Interfaces;
+using TicTacToe.Logic.Components;
 
-namespace Logic.Systems
+namespace TicTacToe.Logic.Systems
 {
     public class DrawSystem : IEcsRunSystem
     {

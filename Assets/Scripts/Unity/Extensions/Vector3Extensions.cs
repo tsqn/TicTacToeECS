@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Unity.Extensions
+namespace TicTacToe.Unity.Extensions
 {
     public static class Vector3Extensions
     {

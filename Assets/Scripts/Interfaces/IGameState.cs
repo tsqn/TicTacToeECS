@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
-using Core;
+using TicTacToe.Core;
 
-namespace Interfaces
+namespace TicTacToe.Interfaces
 {
     public interface IGameState
     {

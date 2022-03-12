@@ -1,9 +1,9 @@
-using Interfaces;
-using Unity.Extensions;
-using Unity.Views;
+using TicTacToe.Interfaces;
+using TicTacToe.Unity.Extensions;
+using TicTacToe.Unity.Views;
 using UnityEngine;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     [CreateAssetMenu]
     public class Configuration : ScriptableObject, IConfiguration

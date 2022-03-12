@@ -1,6 +1,6 @@
-using Interfaces;
+using TicTacToe.Interfaces;
 
-namespace Logic.Components.Refs
+namespace TicTacToe.Logic.Components.Refs
 {
     public struct CellViewRef
     {

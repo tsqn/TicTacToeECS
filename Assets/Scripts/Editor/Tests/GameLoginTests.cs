@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Numerics;
-using Core;
 using Leopotam.EcsLite;
-using Logic.Components;
-using Logic.Extensions;
 using NUnit.Framework;
+using TicTacToe.Core;
+using TicTacToe.Logic.Components;
+using TicTacToe.Logic.Extensions;
 
 namespace TicTacToe.Editor.Tests
 {

@@ -1,9 +1,9 @@
-﻿using Interfaces;
-using Unity.Extensions;
+﻿using TicTacToe.Interfaces;
+using TicTacToe.Unity.Extensions;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
 
-namespace Unity.Wrappers
+namespace TicTacToe.Unity.Wrappers
 {
     public class MonoDecorator : MonoBehaviour, IObject, ITransform
     {

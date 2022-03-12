@@ -1,6 +1,6 @@
-using Core;
+using TicTacToe.Core;
 
-namespace Logic.Components
+namespace TicTacToe.Logic.Components
 {
     public struct Taken
     {

@@ -1,7 +1,7 @@
-﻿using Interfaces;
+﻿using TicTacToe.Interfaces;
 using UnityEngine;
 
-namespace Unity.Wrappers
+namespace TicTacToe.Unity.Wrappers
 {
     public class UIDecorator : Screen, IUI
     {

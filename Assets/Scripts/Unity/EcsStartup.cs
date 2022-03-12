@@ -1,15 +1,19 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.UnityEditor;
-using Logic.Systems;
-using Unity.Wrappers;
+using TicTacToe.Logic.Systems;
+using TicTacToe.Unity.Wrappers;
 using UnityEngine;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     internal sealed class EcsStartup : MonoBehaviour
     {
-        public Configuration Configuration;
-        public SceneData SceneData;
+        [SerializeField]
+        public Configuration _configuration;
+
+        [SerializeField]
+        public SceneData _sceneData;
+
         private EcsSystems _editorSystems;
         private EcsSystems _systems;
         private EcsWorld _world;
@@ -18,9 +22,9 @@ namespace Unity
         {
             var sharedData = new SharedData
             {
-                Configuration = Configuration,
+                Configuration = _configuration,
                 GameState = new GameState(),
-                SceneData = SceneData,
+                SceneData = _sceneData,
                 Input = new InputDecorator(),
                 Physics = new PhysicsDecorator()
             };

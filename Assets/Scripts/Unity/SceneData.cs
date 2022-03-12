@@ -1,8 +1,8 @@
-using Interfaces;
-using Unity.Wrappers;
+using TicTacToe.Interfaces;
+using TicTacToe.Unity.Wrappers;
 using UnityEngine;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     public class SceneData : MonoBehaviour, ISceneData
     {

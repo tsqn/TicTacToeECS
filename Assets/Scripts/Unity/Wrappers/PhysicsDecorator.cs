@@ -1,8 +1,8 @@
-﻿using Interfaces;
-using Unity.Extensions;
+﻿using TicTacToe.Interfaces;
+using TicTacToe.Unity.Extensions;
 using UnityEngine;
 
-namespace Unity.Wrappers
+namespace TicTacToe.Unity.Wrappers
 {
     public class PhysicsDecorator : IPhysics
     {

@@ -1,4 +1,4 @@
-namespace Interfaces
+namespace TicTacToe.Interfaces
 {
     public interface ISceneData
     {

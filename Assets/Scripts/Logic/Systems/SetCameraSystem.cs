@@ -1,9 +1,9 @@
 using System.Numerics;
-using Interfaces;
 using Leopotam.EcsLite;
-using Logic.Components.Events;
+using TicTacToe.Interfaces;
+using TicTacToe.Logic.Components.Events;
 
-namespace Logic.Systems
+namespace TicTacToe.Logic.Systems
 {
     public class SetCameraSystem : IEcsRunSystem
     {

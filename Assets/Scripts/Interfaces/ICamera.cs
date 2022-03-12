@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Interfaces
+namespace TicTacToe.Interfaces
 {
     public interface ICamera
     {

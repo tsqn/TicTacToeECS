@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Core;
-using Interfaces;
+using TicTacToe.Core;
+using TicTacToe.Interfaces;
 using Vector2 = System.Numerics.Vector2;
 
-namespace Unity
+namespace TicTacToe.Unity
 {
     public class GameState : IGameState
     {
