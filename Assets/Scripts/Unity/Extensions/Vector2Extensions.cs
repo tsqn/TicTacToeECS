@@ -8,7 +8,7 @@ namespace TicTacToe.Unity.Extensions
         {
             return new Vector2(input.x, input.y);
         }
-        
+
         public static UnityEngine.Vector2 Convert(this Vector2 input)
         {
             return new UnityEngine.Vector2(input.X, input.Y);

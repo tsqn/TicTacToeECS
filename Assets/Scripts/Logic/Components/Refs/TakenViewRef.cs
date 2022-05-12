@@ -6,6 +6,4 @@ namespace TicTacToe.Logic.Components.Refs
     {
         public ISignView View;
     }
-
-    
 }

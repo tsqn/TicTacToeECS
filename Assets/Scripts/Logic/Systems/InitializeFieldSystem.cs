@@ -17,7 +17,7 @@ namespace TicTacToe.Logic.Systems
             var gameState = sharedData.GameState;
 
             var cellComponents = world.GetPool<Cell>();
-            var positionComponents = world.GetPool<Position>();
+            var positionComponents = world.GetPool<CellPosition>();
 
             for (var x = 0; x < configuration.LevelWidth; x++)
             {
@@ -28,7 +28,6 @@ namespace TicTacToe.Logic.Systems
                     cellComponents.Add(newCell);
                     ref var position = ref positionComponents.Add(newCell);
                     position.Value = new Vector2(x, y);
-
 
                     gameState.Cells[position.Value] = newCell;
                 }

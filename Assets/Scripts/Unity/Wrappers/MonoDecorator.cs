@@ -7,14 +7,18 @@ namespace TicTacToe.Unity.Wrappers
 {
     public class MonoDecorator : MonoBehaviour, IObject, ITransform
     {
-        public object Instantiate()
+        public object Instantiate(int id)
         {
-            return Object.Instantiate(this);
+            var newObject = Instantiate(this);
+            Synchronizer.Instance.AddObject(id, newObject);
+            return newObject;
         }
 
-        public object Instantiate(Vector3 vector3)
+        public object Instantiate(int id, Vector3 vector3)
         {
-            return Object.Instantiate(this, vector3.Convert(), Quaternion.identity);
+            var newObject = Instantiate(this, vector3.Convert(), Quaternion.identity);
+            Synchronizer.Instance.AddObject(id, newObject);
+            return newObject;
         }
 
         public Vector3 Position
@@ -23,5 +27,4 @@ namespace TicTacToe.Unity.Wrappers
             set => transform.position = value.Convert();
         }
     }
-    
 }

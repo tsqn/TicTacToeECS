@@ -29,7 +29,8 @@ namespace TicTacToe.Logic.Extensions
             var firstDiagonalLength = CheckLine(ecsWorld, cells, position, startType, new Vector2(1, 1));
             var secondDiagonalLength = CheckLine(ecsWorld, cells, position, startType, new Vector2(-1, 1));
 
-            return Math.Max(horizontalLength, Math.Max(Math.Max(verticalLength, firstDiagonalLength), secondDiagonalLength));
+            return Math.Max(horizontalLength,
+                Math.Max(Math.Max(verticalLength, firstDiagonalLength), secondDiagonalLength));
         }
 
         private static int CheckLine(EcsWorld world, Dictionary<Vector2, int> cells, Vector2 position,

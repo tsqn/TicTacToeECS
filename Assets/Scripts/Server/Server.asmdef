@@ -1,7 +1,9 @@
 {
-  "name": "Core",
+  "name": "Server",
   "rootNamespace": "TicTacToe",
-  "references": [],
+  "references": [
+    "GUID:c0778de81aa3e0c41943b123e6815744"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
@@ -10,5 +12,5 @@
   "autoReferenced": true,
   "defineConstraints": [],
   "versionDefines": [],
-  "noEngineReferences": true
+  "noEngineReferences": false
 }

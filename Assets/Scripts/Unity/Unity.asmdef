@@ -1,21 +1,23 @@
 {
-    "name": "Unity",
-    "rootNamespace": "TicTacToe",
-    "references": [
-        "GUID:648c9d83bae324c48ba728ca122a4fae",
-        "GUID:370593e8d602246479a4b99b31256ecc",
-        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
-        "GUID:206779980ac58453ea65e900299ccf71",
-        "GUID:a22362b82293644e1bbe51356c008d63",
-        "GUID:c0778de81aa3e0c41943b123e6815744"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "Unity",
+  "rootNamespace": "TicTacToe",
+  "references": [
+    "GUID:648c9d83bae324c48ba728ca122a4fae",
+    "GUID:370593e8d602246479a4b99b31256ecc",
+    "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+    "GUID:206779980ac58453ea65e900299ccf71",
+    "GUID:a22362b82293644e1bbe51356c008d63",
+    "GUID:c0778de81aa3e0c41943b123e6815744",
+    "GUID:3cb33db11b954adbbe6997222ca77936",
+    "GUID:c69faf4576a94827a28c1a08c58c2748"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

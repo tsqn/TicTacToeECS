@@ -20,7 +20,7 @@ namespace TicTacToe.Logic.Systems
 
                 if (sharedData.Physics.Raycast(ray, out var hitInfo))
                 {
-                    var cellView = (ICellView)hitInfo.Collider.GetComponent<ICellView>();
+                    var cellView = (ICellView) hitInfo.Collider.GetComponent<ICellView>();
 
                     if (cellView != null)
                     {

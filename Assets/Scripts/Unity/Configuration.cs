@@ -8,19 +8,26 @@ namespace TicTacToe.Unity
     [CreateAssetMenu]
     public class Configuration : ScriptableObject, IConfiguration
     {
-        [SerializeField] private int _levelWidth = 3;
+        [SerializeField]
+        private int _levelWidth = 3;
 
-        [SerializeField] private int _levelHeight = 3;
+        [SerializeField]
+        private int _levelHeight = 3;
 
-        [SerializeField] private int _chainLength = 3;
+        [SerializeField]
+        private int _chainLength = 3;
 
-        [SerializeField] private CellView _cellView;
+        [SerializeField]
+        private CellView _cellView;
 
-        [SerializeField] private Vector2 _offset;
+        [SerializeField]
+        private Vector2 _offset;
 
-        [SerializeField] private SignView _crossView;
+        [SerializeField]
+        private SignView _crossView;
 
-        [SerializeField] private SignView _ringView;
+        [SerializeField]
+        private SignView _ringView;
 
         public ICellView CellView => _cellView;
         public System.Numerics.Vector2 Offset => _offset.Convert();

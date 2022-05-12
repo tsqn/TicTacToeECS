@@ -1,18 +1,18 @@
 {
-    "name": "Logic",
-    "rootNamespace": "TicTacToe",
-    "references": [
-        "GUID:648c9d83bae324c48ba728ca122a4fae",
-        "GUID:e59bf9fc7d5a44b18a819a92edd46163",
-        "GUID:c0778de81aa3e0c41943b123e6815744"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": true
+  "name": "Logic",
+  "rootNamespace": "TicTacToe",
+  "references": [
+    "GUID:648c9d83bae324c48ba728ca122a4fae",
+    "GUID:e59bf9fc7d5a44b18a819a92edd46163",
+    "GUID:c0778de81aa3e0c41943b123e6815744"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
 }

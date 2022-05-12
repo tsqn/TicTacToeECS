@@ -37,9 +37,9 @@ namespace TicTacToe.Logic.Systems
                     _ => throw new ArgumentOutOfRangeException()
                 };
 
-                var instance =  sigView.Instantiate(position);
+                var instance = sigView.Instantiate(id, position);
                 ref var takenViewRef = ref takenViewRefs.Add(id);
-                takenViewRef.View = (ISignView)instance;
+                takenViewRef.View = (ISignView) instance;
             }
         }
     }

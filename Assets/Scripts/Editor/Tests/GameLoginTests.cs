@@ -18,7 +18,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var chainLenght = cells.GetLongestChain(world,Vector2.Zero);
+            var chainLenght = cells.GetLongestChain(world, Vector2.Zero);
 
             Assert.AreEqual(0, chainLenght);
         }
@@ -34,7 +34,7 @@ namespace TicTacToe.Editor.Tests
             var takenPool = world.GetPool<Taken>();
             takenPool.Add(cells[Vector2.Zero]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,Vector2.Zero);
+            var chainLenght = cells.GetLongestChain(world, Vector2.Zero);
 
             Assert.AreEqual(1, chainLenght);
         }
@@ -51,7 +51,7 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2(2, 0));
+            var chainLenght = cells.GetLongestChain(world, new Vector2(2, 0));
 
 
             Assert.AreEqual(2, chainLenght);
@@ -68,7 +68,7 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 0));
+            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 0));
 
 
             Assert.AreEqual(2, chainLenght);
@@ -86,7 +86,7 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(0, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2(0, 1));
+            var chainLenght = cells.GetLongestChain(world, new Vector2(0, 1));
 
 
             Assert.AreEqual(3, chainLenght);
@@ -104,7 +104,7 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 1));
+            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
 
 
             Assert.AreEqual(3, chainLenght);
@@ -121,7 +121,7 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world,new Vector2(1, 1));
+            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
 
 
             Assert.AreEqual(3, chainLenght);
@@ -147,7 +147,7 @@ namespace TicTacToe.Editor.Tests
         {
             var id = world.NewEntity();
 
-            var positionPool = world.GetPool<Position>();
+            var positionPool = world.GetPool<CellPosition>();
             var cellPool = world.GetPool<Cell>();
 
             ref var positionComponent = ref positionPool.Add(id);

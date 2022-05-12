@@ -21,6 +21,5 @@ namespace TicTacToe.Interfaces
     {
         public Vector3 Origin { get; }
         public Vector3 Destination { get; }
-
     }
 }

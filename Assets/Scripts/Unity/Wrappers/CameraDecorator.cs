@@ -1,6 +1,7 @@
 ﻿using TicTacToe.Interfaces;
 using TicTacToe.Unity.Extensions;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 namespace TicTacToe.Unity.Wrappers
 {
@@ -25,7 +26,7 @@ namespace TicTacToe.Unity.Wrappers
             set => _camera.orthographicSize = value;
         }
 
-        public IRay ScreenPointToRay(System.Numerics.Vector3 mousePosition)
+        public IRay ScreenPointToRay(Vector3 mousePosition)
         {
             return new RayDecorator(_camera.ScreenPointToRay(mousePosition.Convert()));
         }
@@ -41,7 +42,7 @@ namespace TicTacToe.Unity.Wrappers
             _ray = screenPointToRay;
         }
 
-        public System.Numerics.Vector3 Origin => _ray.origin.Convert();
-        public System.Numerics.Vector3 Destination => _ray.direction.Convert();
+        public Vector3 Origin => _ray.origin.Convert();
+        public Vector3 Destination => _ray.direction.Convert();
     }
 }

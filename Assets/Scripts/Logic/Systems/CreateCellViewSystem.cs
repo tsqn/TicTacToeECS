@@ -1,3 +1,4 @@
+using System.Numerics;
 using Leopotam.EcsLite;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
@@ -14,19 +15,21 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var configuration = sharedData.Configuration;
 
-            var filter = world.Filter<Cell>().Inc<Position>().Exc<CellViewRef>().End();
+            var filter = world.Filter<Cell>().Inc<CellPosition>().Exc<CellViewRef>().End();
 
+            var cellPositions = world.GetPool<CellPosition>();
             var positions = world.GetPool<Position>();
             var cellViewRefs = world.GetPool<CellViewRef>();
 
             foreach (var index in filter)
             {
-                ref var position = ref positions.Get(index);
+                ref var position = ref cellPositions.Get(index);
+                ref var pos = ref positions.Add(index);
 
-                var cellView = (ICellView)configuration.CellView.Instantiate();
-
-                cellView.Position = new System.Numerics.Vector3(position.Value.X + configuration.Offset.X * position.Value.X,
+                pos.Value = new Vector3(position.Value.X + configuration.Offset.X * position.Value.X,
                     position.Value.Y + configuration.Offset.Y * position.Value.Y, 0);
+
+                var cellView = (ICellView) configuration.CellView.Instantiate(index);
 
                 cellView.Entity = index;
 
