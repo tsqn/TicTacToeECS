@@ -23,6 +23,11 @@ namespace TicTacToe.Unity.Decorators
             return newObject;
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
         public object Instantiate(int id, Vector3 vector3)
         {
             var newObject = Instantiate(this, vector3.Convert(), Quaternion.identity);

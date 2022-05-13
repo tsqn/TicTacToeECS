@@ -1,8 +1,8 @@
 ﻿using System;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
+using TicTacToe.Logic.Components.Events;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TicTacToe.Unity.Decorators
@@ -10,7 +10,10 @@ namespace TicTacToe.Unity.Decorators
     public class WinScreenDecorator : Screen, IWinScreen
     {
         [SerializeField]
-        public Text _text;
+        private Text _text;
+
+        [SerializeField]
+        private EventsManager _eventsManager;
 
         public void SetWinner(SignType winnerType)
         {
@@ -25,7 +28,8 @@ namespace TicTacToe.Unity.Decorators
 
         public void OnRestartClick()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            _eventsManager.Events.Enqueue(new RestartEvent());
+            Hide();
         }
     }
 }

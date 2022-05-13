@@ -27,7 +27,7 @@ namespace TicTacToe.Logic.Systems
             {
                 ref var winner = ref takenCells.Get(id);
 
-                sceneData.UI.WinScreen.Show(true);
+                sceneData.UI.WinScreen.Show();
                 sceneData.UI.WinScreen.SetWinner(winner.Type);
 
                 winnerPool.Del(id);

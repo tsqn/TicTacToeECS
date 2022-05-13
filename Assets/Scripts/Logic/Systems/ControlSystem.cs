@@ -13,12 +13,29 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var sceneData = sharedData.SceneData;
 
+            var world = systems.GetWorld();
+            
+            var eventsQueue = sharedData.EventsManager.Events;
 
+            if (eventsQueue.TryDequeue(out var result))
+            {
+                switch (result)
+                {
+                    case RestartEvent:
+                    {
+                        var restartEvents = world.GetPool<RestartEvent>();
+                        restartEvents.Add(world.NewEntity());
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
             if (sharedData.GameState.State != State.Playing)
             {
                 return;
             }
-
 
             if (sharedData.Input.GetMouseButtonDown(0))
             {
@@ -32,7 +49,6 @@ namespace TicTacToe.Logic.Systems
 
                     if (cellView != null)
                     {
-                        var world = systems.GetWorld();
                         var clickedPool = world.GetPool<ClickedEvent>();
                         var takenPool = world.GetPool<Sign>();
 

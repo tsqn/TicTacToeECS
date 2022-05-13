@@ -29,9 +29,8 @@ namespace TicTacToe.Logic.Systems
 
             if (cellsFilter.GetEntitiesCount() == 0 && winnerFilter.GetEntitiesCount() == 0)
             {
-                sceneData.UI.WinScreen.Show(true);
+                sceneData.UI.WinScreen.Show();
                 sceneData.UI.WinScreen.SetWinner(SignType.None);
-
 
                 gameState.State = State.GameOver;
                 _logger.Debug("Draw");

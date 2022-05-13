@@ -19,7 +19,7 @@ namespace TicTacToe.Logic.Systems
 
             var filter = world.Filter<Sign>().Inc<CellViewRef>().Exc<SignViewRef>().End();
 
-            var takenCells = world.GetPool<Sign>();
+            var signed = world.GetPool<Sign>();
             var cellViewRefs = world.GetPool<CellViewRef>();
             var takenViewRefs = world.GetPool<SignViewRef>();
 
@@ -27,7 +27,7 @@ namespace TicTacToe.Logic.Systems
             {
                 ref var cellViewRef = ref cellViewRefs.Get(id);
                 var position = cellViewRef.View.Position;
-                ref var takenComponent = ref takenCells.Get(id);
+                ref var takenComponent = ref signed.Get(id);
                 var taken = takenComponent.Type;
 
                 var sigView = taken switch

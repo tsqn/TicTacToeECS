@@ -5,9 +5,14 @@ namespace TicTacToe.Unity
 {
     public class Screen : MonoBehaviour, IScreen
     {
-        public void Show(bool state)
+        public void Show()
         {
-            gameObject.SetActive(state);
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

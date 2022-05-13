@@ -2,6 +2,7 @@
 {
     public interface IScreen
     {
-        void Show(bool b);
+        void Show();
+        void Hide();
     }
 }

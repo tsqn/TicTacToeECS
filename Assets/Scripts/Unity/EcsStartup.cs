@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using TicTacToe.Interfaces;
 using TicTacToe.Logic.Systems;
 using TicTacToe.Unity.Decorators;
 using UnityEngine;
@@ -12,10 +14,13 @@ namespace TicTacToe.Unity
     internal sealed class EcsStartup : MonoBehaviour
     {
         [SerializeField]
-        public Configuration _configuration;
+        private Configuration _configuration;
 
         [SerializeField]
-        public SceneData _sceneData;
+        private SceneData _sceneData;
+
+        [SerializeField]
+        private EventsManager _eventsManager;
 
         private EcsSystems _editorSystems;
         private SharedData _sharedData;
@@ -31,7 +36,8 @@ namespace TicTacToe.Unity
                 GameState = new GameState(),
                 SceneData = _sceneData,
                 Input = new InputDecorator(),
-                Physics = new PhysicsDecorator()
+                Physics = new PhysicsDecorator(),
+                EventsManager = _eventsManager
             };
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, _sharedData);
@@ -56,6 +62,8 @@ namespace TicTacToe.Unity
                 .Add(new CheckWinSystem())
                 .Add(new WinSystem())
                 .Add(new DrawSystem())
+                .Add(new RestartSystem())
+                .Add(new DeleteSystem())
                 .Inject(logger)
                 .Init();
         }

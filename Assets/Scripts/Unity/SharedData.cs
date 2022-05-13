@@ -1,4 +1,5 @@
-﻿using TicTacToe.Interfaces;
+﻿using System.Collections.Generic;
+using TicTacToe.Interfaces;
 
 namespace TicTacToe.Unity
 {
@@ -8,6 +9,7 @@ namespace TicTacToe.Unity
         public IConfiguration Configuration { get; set; }
         public ISceneData SceneData { get; set; }
         public IInput Input { get; set; }
+        public IEventsManager EventsManager { get; set; }
         public IPhysics Physics { get; set; }
     }
 }
