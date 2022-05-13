@@ -21,8 +21,9 @@ namespace TicTacToe.Unity
         private EventsManager _eventsManager;
 
         private EcsSystems _editorSystems;
-        private SharedData _sharedData;
 
+        private EventsResolver _eventsResolver;
+        private SharedData _sharedData;
         private EcsSystems _systems;
         private EcsWorld _world;
 
@@ -37,6 +38,13 @@ namespace TicTacToe.Unity
                 Physics = new PhysicsDecorator(),
                 EventsManager = _eventsManager
             };
+
+            _eventsResolver = new EventsResolver
+            {
+                EventsManager = _eventsManager,
+                WinScreen = _sceneData.UI.WinScreen
+            };
+
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, _sharedData);
 
@@ -58,8 +66,7 @@ namespace TicTacToe.Unity
                 .Add(new AnalyzeClickSystem())
                 .Add(new CreateSignViewSystem())
                 .Add(new CheckWinSystem())
-                .Add(new WinSystem())
-                .Add(new DrawSystem())
+                .Add(new GameOverSystem())
                 .Add(new RestartSystem())
                 .Add(new DeleteSystem())
                 .Inject(logger)
@@ -73,6 +80,7 @@ namespace TicTacToe.Unity
 #if UNITY_EDITOR
             _editorSystems.Run();
 #endif
+            _eventsResolver.Update();
         }
 
         private void OnDestroy()

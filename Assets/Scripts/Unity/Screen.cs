@@ -1,9 +1,8 @@
-using TicTacToe.Interfaces;
 using UnityEngine;
 
 namespace TicTacToe.Unity
 {
-    public class Screen : MonoBehaviour, IScreen
+    public class Screen : MonoBehaviour
     {
         public void Show()
         {

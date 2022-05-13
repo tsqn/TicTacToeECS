@@ -10,10 +10,11 @@ namespace TicTacToe.Unity
         private CameraDecorator _camera;
 
         [SerializeField]
-        private UIDecorator _ui;
+        private UI _ui;
 
         public ITransform CameraTransform => _camera;
         public ICamera Camera => _camera;
-        public IUI UI => _ui;
+        
+        public UI UI => _ui;
     }
 }

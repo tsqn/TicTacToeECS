@@ -15,7 +15,7 @@ namespace TicTacToe.Logic.Systems
 
             var world = systems.GetWorld();
 
-            var eventsQueue = sharedData.EventsManager.Events;
+            var eventsQueue = sharedData.EventsManager.InputEvents;
 
             if (eventsQueue.TryDequeue(out var result))
             {

@@ -8,9 +8,12 @@ namespace TicTacToe.Unity
     {
         public void Awake()
         {
-            Events = new Queue<IEvent>();
+            InputEvents = new Queue<IEvent>();
+            OutputEvents = new Queue<IEvent>();
         }
 
-        public Queue<IEvent> Events { get; set; }
+        public Queue<IEvent> OutputEvents { get; set; }
+
+        public Queue<IEvent> InputEvents { get; set; }
     }
 }

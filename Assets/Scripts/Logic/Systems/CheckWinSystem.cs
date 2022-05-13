@@ -1,4 +1,6 @@
+using System;
 using Leopotam.EcsLite;
+using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
@@ -18,9 +20,10 @@ namespace TicTacToe.Logic.Systems
             var filter = world.Filter<CellPosition>().Inc<Sign>().Inc<CheckWinEvent>().End();
 
             var positions = world.GetPool<CellPosition>();
-            var winner = world.GetPool<Winner>();
             var eventPool = world.GetPool<CheckWinEvent>();
 
+            var cellsFilter = world.Filter<Cell>().Exc<Sign>().End();
+            
             foreach (var id in filter)
             {
                 ref var position = ref positions.Get(id);
@@ -29,11 +32,24 @@ namespace TicTacToe.Logic.Systems
 
                 if (chainLength >= configuration.ChainLength)
                 {
-                    winner.Add(id);
+                    world.GetPool<GameOverEvent>().Add(world.NewEntity()).Result =
+                        world.GetPool<Sign>().Get(id).Type switch
+                        {
+                            SignType.None => throw new ArgumentOutOfRangeException(),
+                            SignType.Cross => SignType.Cross,
+                            SignType.Ring => SignType.Ring,
+                            _ => throw new ArgumentOutOfRangeException()
+                        };
+                }
+                else if (cellsFilter.GetEntitiesCount() == 0)
+                {
+                    world.GetPool<GameOverEvent>().Add(world.NewEntity()).Result = SignType.None;
                 }
 
                 eventPool.Del(id);
             }
+            
+         
         }
     }
 }
