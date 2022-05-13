@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
@@ -12,6 +13,13 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var sceneData = sharedData.SceneData;
 
+            
+            if (sharedData.GameState.State != State.Playing)
+            {
+                return;
+            }
+
+            
             if (sharedData.Input.GetMouseButtonDown(0))
             {
                 var camera = sceneData.Camera;

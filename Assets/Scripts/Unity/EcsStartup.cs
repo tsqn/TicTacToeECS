@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using TicTacToe.Logic.Systems;
 using TicTacToe.Unity.Wrappers;
 using UnityEngine;
@@ -42,6 +43,15 @@ namespace TicTacToe.Unity
 
             EditorSystemsInit();
 
+            var logger = new Logger()
+            {
+                WriteToUnityConsole = true,
+                WriteDebugToUnityConsole = true,
+                WriteErrorsToUnityConsole = true,
+                WriteWarningToUnityConsole = true
+            };
+            
+            
             _systems
                 .Add(new InitializeFieldSystem())
                 .Add(new CreateCellViewSystem())
@@ -55,6 +65,7 @@ namespace TicTacToe.Unity
                 // .Add(new RandomMotionSystem())
                 .Add(new SerializationSystem())
                 .Add(new SyncSystem())
+                .Inject(logger)
                 .Init();
         }
 

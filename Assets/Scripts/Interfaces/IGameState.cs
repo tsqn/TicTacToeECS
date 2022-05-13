@@ -8,5 +8,6 @@ namespace TicTacToe.Interfaces
     {
         public SignType CurrentSign { get; set; }
         public Dictionary<Vector2, int> Cells { get; }
+        public State State { get; set; }
     }
 }

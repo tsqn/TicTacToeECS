@@ -9,5 +9,6 @@ namespace TicTacToe.Unity
     {
         public SignType CurrentSign { get; set; } = SignType.Ring;
         public Dictionary<Vector2, int> Cells { get; } = new();
+        public State State { get; set; } = State.Playing;
     }
 }
