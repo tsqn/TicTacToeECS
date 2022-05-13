@@ -1,5 +1,5 @@
 ﻿using TicTacToe.Interfaces;
-using TicTacToe.Unity.Wrappers;
+using TicTacToe.Unity.Decorators;
 
 namespace TicTacToe.Unity.Views
 {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace TicTacToe.Unity.Wrappers
+namespace TicTacToe.Unity.Decorators
 {
     public class WinScreenDecorator : Screen, IWinScreen
     {

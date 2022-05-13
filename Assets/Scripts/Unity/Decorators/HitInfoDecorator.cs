@@ -1,7 +1,7 @@
 ﻿using TicTacToe.Interfaces;
 using UnityEngine;
 
-namespace TicTacToe.Unity.Wrappers
+namespace TicTacToe.Unity.Decorators
 {
     public class HitInfoDecorator : IHitInfo
     {

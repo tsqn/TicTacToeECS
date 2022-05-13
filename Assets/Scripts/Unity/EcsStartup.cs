@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using TicTacToe.Logic.Systems;
-using TicTacToe.Unity.Wrappers;
+using TicTacToe.Unity.Decorators;
 using UnityEngine;
 #if UNITY_EDITOR
 using Leopotam.EcsLite.UnityEditor;

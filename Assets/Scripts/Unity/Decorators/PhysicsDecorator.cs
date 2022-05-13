@@ -2,7 +2,7 @@
 using TicTacToe.Unity.Extensions;
 using UnityEngine;
 
-namespace TicTacToe.Unity.Wrappers
+namespace TicTacToe.Unity.Decorators
 {
     public class PhysicsDecorator : IPhysics
     {

@@ -3,7 +3,7 @@ using TicTacToe.Unity.Extensions;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
 
-namespace TicTacToe.Unity.Wrappers
+namespace TicTacToe.Unity.Decorators
 {
     public class MonoDecorator : MonoBehaviour, IObject, ITransform, IEntity
     {
