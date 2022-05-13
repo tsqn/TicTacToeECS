@@ -2,7 +2,7 @@ using TicTacToe.Core;
 
 namespace TicTacToe.Logic.Components
 {
-    public struct Taken
+    public struct Sign
     {
         public SignType Type;
     }

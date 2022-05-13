@@ -7,6 +7,5 @@
         ISceneData SceneData { get; }
         IInput Input { get; set; }
         IPhysics Physics { get; set; }
-        IServer Server { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var gameState = sharedData.GameState;
 
-            var filter = world.Filter<Cell>().Inc<ClickedEvent>().Exc<Taken>().End();
+            var filter = world.Filter<Cell>().Inc<ClickedEvent>().Exc<Sign>().End();
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             var checkWinEventPool = world.GetPool<CheckWinEvent>();
             var clickedEventPool = world.GetPool<ClickedEvent>();
 

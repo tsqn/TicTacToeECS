@@ -2,5 +2,6 @@
 {
     public interface ISignView : IObject
     {
+        
     }
 }

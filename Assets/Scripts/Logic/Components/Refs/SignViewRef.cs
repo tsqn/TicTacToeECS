@@ -2,7 +2,7 @@
 
 namespace TicTacToe.Logic.Components.Refs
 {
-    public struct TakenViewRef
+    public struct SignViewRef
     {
         public ISignView View;
     }

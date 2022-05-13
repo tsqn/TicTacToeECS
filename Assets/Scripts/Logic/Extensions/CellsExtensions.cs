@@ -14,7 +14,7 @@ namespace TicTacToe.Logic.Extensions
         {
             var startEntity = cells[position];
 
-            var takenPool = ecsWorld.GetPool<Taken>();
+            var takenPool = ecsWorld.GetPool<Sign>();
 
             if (!takenPool.Has(startEntity))
             {
@@ -52,7 +52,7 @@ namespace TicTacToe.Logic.Extensions
             var currentPosition = position + direction;
             while (cells.TryGetValue(currentPosition, out var entity))
             {
-                var takenPool = world.GetPool<Taken>();
+                var takenPool = world.GetPool<Sign>();
 
                 if (!takenPool.Has(entity))
                 {

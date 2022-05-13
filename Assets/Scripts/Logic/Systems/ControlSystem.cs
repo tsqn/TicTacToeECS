@@ -34,7 +34,7 @@ namespace TicTacToe.Logic.Systems
                     {
                         var world = systems.GetWorld();
                         var clickedPool = world.GetPool<ClickedEvent>();
-                        var takenPool = world.GetPool<Taken>();
+                        var takenPool = world.GetPool<Sign>();
 
                         if (!takenPool.Has(cellView.Entity))
                         {

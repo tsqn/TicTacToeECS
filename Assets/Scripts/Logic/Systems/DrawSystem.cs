@@ -24,7 +24,7 @@ namespace TicTacToe.Logic.Systems
             
             var world = systems.GetWorld();
 
-            var cellsFilter = world.Filter<Cell>().Exc<Taken>().End();
+            var cellsFilter = world.Filter<Cell>().Exc<Sign>().End();
             var winnerFilter = world.Filter<Winner>().End();
 
             if (cellsFilter.GetEntitiesCount() == 0 && winnerFilter.GetEntitiesCount() == 0)

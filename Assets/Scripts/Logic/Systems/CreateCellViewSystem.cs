@@ -29,9 +29,7 @@ namespace TicTacToe.Logic.Systems
                 pos.Value = new Vector3(position.Value.X + configuration.Offset.X * position.Value.X,
                     position.Value.Y + configuration.Offset.Y * position.Value.Y, 0);
 
-                var cellView = (ICellView) configuration.CellView.Instantiate(index);
-
-                cellView.Entity = index;
+                var cellView = (ICellView) configuration.CellView.Instantiate(index, pos.Value);
 
                 ref var cellViewRef = ref cellViewRefs.Add(index);
                 cellViewRef.View = cellView;

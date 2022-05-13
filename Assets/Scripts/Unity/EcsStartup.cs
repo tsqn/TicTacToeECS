@@ -21,7 +21,6 @@ namespace TicTacToe.Unity
         private EcsSystems _editorSystems;
         private SharedData _sharedData;
 
-        private Synchronizer _synchronizer;
         private EcsSystems _systems;
         private EcsWorld _world;
 
@@ -34,12 +33,9 @@ namespace TicTacToe.Unity
                 SceneData = _sceneData,
                 Input = new InputDecorator(),
                 Physics = new PhysicsDecorator(),
-                Server = new Server.Server()
             };
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, _sharedData);
-
-            _synchronizer = Synchronizer.Instance;
 
             EditorSystemsInit();
 
@@ -58,13 +54,10 @@ namespace TicTacToe.Unity
                 .Add(new SetCameraSystem())
                 .Add(new ControlSystem())
                 .Add(new AnalyzeClickSystem())
-                .Add(new CreateTakenViewSystem())
+                .Add(new CreateSignViewSystem())
                 .Add(new CheckWinSystem())
                 .Add(new WinSystem())
                 .Add(new DrawSystem())
-                // .Add(new RandomMotionSystem())
-                .Add(new SerializationSystem())
-                .Add(new SyncSystem())
                 .Inject(logger)
                 .Init();
         }
@@ -76,8 +69,6 @@ namespace TicTacToe.Unity
 #if UNITY_EDITOR
             _editorSystems.Run();
 #endif
-
-            _synchronizer.Sync();
         }
 
         private void OnDestroy()
@@ -89,9 +80,6 @@ namespace TicTacToe.Unity
                 _world.Destroy();
                 _world = null;
             }
-
-            _synchronizer?.Dispose();
-            _sharedData?.Dispose();
         }
 
         private void EditorSystemsInit()

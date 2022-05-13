@@ -30,7 +30,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[Vector2.Zero]).Type = SignType.Cross;
 
             var chainLenght = cells.GetLongestChain(world, Vector2.Zero);
@@ -45,7 +45,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
@@ -61,7 +61,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
@@ -78,7 +78,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
@@ -95,7 +95,7 @@ namespace TicTacToe.Editor.Tests
 
             var cells = CreateTestCells(world);
 
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[new Vector2(2, 2)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
@@ -111,7 +111,7 @@ namespace TicTacToe.Editor.Tests
             var world = new EcsWorld();
 
             var cells = CreateTestCells(world);
-            var takenPool = world.GetPool<Taken>();
+            var takenPool = world.GetPool<Sign>();
             takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
             takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;

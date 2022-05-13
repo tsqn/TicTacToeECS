@@ -7,7 +7,7 @@ using TicTacToe.Logic.Components.Refs;
 
 namespace TicTacToe.Logic.Systems
 {
-    public class CreateTakenViewSystem : IEcsRunSystem
+    public class CreateSignViewSystem : IEcsRunSystem
     {
         public void Run(EcsSystems systems)
         {
@@ -17,11 +17,11 @@ namespace TicTacToe.Logic.Systems
             var configuration = sharedData.Configuration;
 
 
-            var filter = world.Filter<Taken>().Inc<CellViewRef>().Exc<TakenViewRef>().End();
+            var filter = world.Filter<Sign>().Inc<CellViewRef>().Exc<SignViewRef>().End();
 
-            var takenCells = world.GetPool<Taken>();
+            var takenCells = world.GetPool<Sign>();
             var cellViewRefs = world.GetPool<CellViewRef>();
-            var takenViewRefs = world.GetPool<TakenViewRef>();
+            var takenViewRefs = world.GetPool<SignViewRef>();
 
             foreach (var id in filter)
             {

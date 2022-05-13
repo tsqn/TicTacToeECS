@@ -18,10 +18,10 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var sceneData = sharedData.SceneData;
 
-            var cellsFilter = world.Filter<Winner>().Inc<Taken>().End();
+            var cellsFilter = world.Filter<Winner>().Inc<Sign>().End();
             var winnerPool = world.GetPool<Winner>();
 
-            var takenCells = world.GetPool<Taken>();
+            var takenCells = world.GetPool<Sign>();
 
             foreach (var id in cellsFilter)
             {
