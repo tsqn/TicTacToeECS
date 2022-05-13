@@ -1,10 +1,8 @@
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Di;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
-using TicTacToe.Logic.Extensions;
 
 namespace TicTacToe.Logic.Systems
 {

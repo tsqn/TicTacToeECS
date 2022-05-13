@@ -3,7 +3,6 @@ using Leopotam.EcsLite.Di;
 using TicTacToe.Logic.Systems;
 using TicTacToe.Unity.Wrappers;
 using UnityEngine;
-
 #if UNITY_EDITOR
 using Leopotam.EcsLite.UnityEditor;
 #endif
@@ -32,22 +31,21 @@ namespace TicTacToe.Unity
                 GameState = new GameState(),
                 SceneData = _sceneData,
                 Input = new InputDecorator(),
-                Physics = new PhysicsDecorator(),
+                Physics = new PhysicsDecorator()
             };
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, _sharedData);
 
             EditorSystemsInit();
 
-            var logger = new Logger()
+            var logger = new Logger
             {
                 WriteToUnityConsole = true,
                 WriteDebugToUnityConsole = true,
                 WriteErrorsToUnityConsole = true,
                 WriteWarningToUnityConsole = true
             };
-            
-            
+
             _systems
                 .Add(new InitializeFieldSystem())
                 .Add(new CreateCellViewSystem())

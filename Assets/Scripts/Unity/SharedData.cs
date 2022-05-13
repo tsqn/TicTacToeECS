@@ -1,5 +1,4 @@
-﻿using System;
-using TicTacToe.Interfaces;
+﻿using TicTacToe.Interfaces;
 
 namespace TicTacToe.Unity
 {

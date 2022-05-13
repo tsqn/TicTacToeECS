@@ -10,7 +10,7 @@ namespace TicTacToe.Logic.Systems
     public class DrawSystem : IEcsRunSystem
     {
         private EcsCustomInject<ILogger> _logger;
-        
+
         public void Run(EcsSystems systems)
         {
             var sharedData = systems.GetShared<ISharedData>();
@@ -21,7 +21,7 @@ namespace TicTacToe.Logic.Systems
             {
                 return;
             }
-            
+
             var world = systems.GetWorld();
 
             var cellsFilter = world.Filter<Cell>().Exc<Sign>().End();
@@ -32,9 +32,9 @@ namespace TicTacToe.Logic.Systems
                 sceneData.UI.WinScreen.Show(true);
                 sceneData.UI.WinScreen.SetWinner(SignType.None);
 
-                
+
                 gameState.State = State.GameOver;
-                _logger.Debug($"Draw");
+                _logger.Debug("Draw");
             }
         }
     }

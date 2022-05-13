@@ -29,9 +29,9 @@ namespace TicTacToe.Logic.Systems
 
                 sceneData.UI.WinScreen.Show(true);
                 sceneData.UI.WinScreen.SetWinner(winner.Type);
-                
+
                 winnerPool.Del(id);
-                
+
                 sharedData.GameState.State = State.GameOver;
                 _logger.Debug($"{winner.Type} Wins!");
             }

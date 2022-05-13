@@ -15,7 +15,7 @@ namespace TicTacToe.Unity.Wrappers
             get => _entity;
             set => _entity = value;
         }
-        
+
         public object Instantiate(int id)
         {
             var newObject = Instantiate(this);

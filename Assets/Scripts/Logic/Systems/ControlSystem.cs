@@ -13,13 +13,13 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var sceneData = sharedData.SceneData;
 
-            
+
             if (sharedData.GameState.State != State.Playing)
             {
                 return;
             }
 
-            
+
             if (sharedData.Input.GetMouseButtonDown(0))
             {
                 var camera = sceneData.Camera;
