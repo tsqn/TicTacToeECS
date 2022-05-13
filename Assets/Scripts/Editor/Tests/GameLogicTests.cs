@@ -9,7 +9,7 @@ using TicTacToe.Logic.Extensions;
 namespace TicTacToe.Editor.Tests
 {
     [TestFixture]
-    public class GameLoginTests
+    public class GameLogicTests
     {
         [Test]
         public void CheckHorizontalChainZero()
@@ -28,7 +28,6 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
@@ -44,7 +43,6 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-
             var cells = CreateTestCells(world);
 
             var takenPool = world.GetPool<Taken>();
@@ -52,7 +50,6 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
 
             var chainLenght = cells.GetLongestChain(world, new Vector2(2, 0));
-
 
             Assert.AreEqual(2, chainLenght);
         }
@@ -88,7 +85,6 @@ namespace TicTacToe.Editor.Tests
 
             var chainLenght = cells.GetLongestChain(world, new Vector2(0, 1));
 
-
             Assert.AreEqual(3, chainLenght);
         }
 
@@ -106,7 +102,6 @@ namespace TicTacToe.Editor.Tests
 
             var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
 
-
             Assert.AreEqual(3, chainLenght);
         }
 
@@ -122,7 +117,6 @@ namespace TicTacToe.Editor.Tests
             takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
 
             var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
-
 
             Assert.AreEqual(3, chainLenght);
         }
