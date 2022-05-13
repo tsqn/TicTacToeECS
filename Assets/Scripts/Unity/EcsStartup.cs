@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using TicTacToe.Interfaces;
 using TicTacToe.Logic.Systems;
 using TicTacToe.Unity.Decorators;
 using UnityEngine;

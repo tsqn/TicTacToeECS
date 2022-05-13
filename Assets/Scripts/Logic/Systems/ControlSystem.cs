@@ -14,7 +14,7 @@ namespace TicTacToe.Logic.Systems
             var sceneData = sharedData.SceneData;
 
             var world = systems.GetWorld();
-            
+
             var eventsQueue = sharedData.EventsManager.Events;
 
             if (eventsQueue.TryDequeue(out var result))
@@ -25,13 +25,11 @@ namespace TicTacToe.Logic.Systems
                     {
                         var restartEvents = world.GetPool<RestartEvent>();
                         restartEvents.Add(world.NewEntity());
+                        break;
                     }
-                        break;
-                    default:
-                        break;
                 }
             }
-            
+
             if (sharedData.GameState.State != State.Playing)
             {
                 return;

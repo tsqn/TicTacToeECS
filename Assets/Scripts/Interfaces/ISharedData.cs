@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TicTacToe.Interfaces
+﻿namespace TicTacToe.Interfaces
 {
     public interface ISharedData
     {
@@ -8,7 +6,7 @@ namespace TicTacToe.Interfaces
         IConfiguration Configuration { get; }
         ISceneData SceneData { get; }
         IInput Input { get; set; }
-        IEventsManager EventsManager { get; set; } 
+        IEventsManager EventsManager { get; set; }
         IPhysics Physics { get; set; }
     }
 }

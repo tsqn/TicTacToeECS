@@ -16,22 +16,22 @@ namespace TicTacToe.Logic.Systems
         public void Run(EcsSystems systems)
         {
             var world = systems.GetWorld();
-            
+
             var sharedData = systems.GetShared<ISharedData>();
-            
+
             var deleteTagsRef = world.GetPool<DeleteTag>();
-            
+
             var signFilter = world.Filter<Sign>().End();
 
             var restartFilter = world.Filter<RestartEvent>().End();
 
             var restartEventsCount = restartFilter.GetEntitiesCount();
-            
+
             if (restartEventsCount is not (0 or 1))
             {
                 _logger.Error($"Invalid restart events count {restartEventsCount}");
             }
-            
+
             if (restartEventsCount == 1)
             {
                 foreach (var id in signFilter)
@@ -40,7 +40,7 @@ namespace TicTacToe.Logic.Systems
                 }
 
                 sharedData.GameState.State = State.Playing;
-                
+
                 world.DelEntity(restartFilter.GetRawEntities()[0]);
             }
         }

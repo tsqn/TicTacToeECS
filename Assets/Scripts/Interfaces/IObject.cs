@@ -6,7 +6,7 @@ namespace TicTacToe.Interfaces
     {
         object Instantiate(int id);
 
-        void Destroy(); 
+        void Destroy();
 
         object Instantiate(int id, Vector3 vector3);
     }
