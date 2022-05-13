@@ -3,7 +3,7 @@ using TicTacToe.Interfaces;
 
 namespace TicTacToe.Logic.Extensions
 {
-    public static class ILoggerExtensions
+    public static class LoggerExtensions
     {
         public static void Debug(this EcsCustomInject<ILogger> logger, object message)
         {
