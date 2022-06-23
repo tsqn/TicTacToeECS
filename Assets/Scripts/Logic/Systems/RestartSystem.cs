@@ -23,7 +23,7 @@ namespace TicTacToe.Logic.Systems
 
             var signFilter = world.Filter<Sign>().End();
 
-            var restartFilter = world.Filter<RestartEvent>().End();
+            var restartFilter = world.Filter<RestartMessage>().End();
 
             var restartEventsCount = restartFilter.GetEntitiesCount();
 

@@ -5,20 +5,19 @@ using UnityEngine;
 
 namespace TicTacToe.Unity
 {
-    public class EventsResolver
+    public class MessageResolver
     {
-        public EventsManager EventsManager;
+        public MessagesBridge MessagesBridge;
         public WinScreen WinScreen;
         
         public void Update()
         {
-            if (EventsManager.OutputEvents.TryDequeue(out var result))
+            if (MessagesBridge.OutputEvents.TryDequeue(out var result))
             {
                 Debug.Log($"{result.GetType()} event occured.");
                 switch (result)
                 {
-                    case GameOverEvent gameOverEvent:
-                        
+                    case GameOverMessage gameOverEvent:
                         WinScreen.SetWinner(gameOverEvent.Result);
                         break;
                     default:

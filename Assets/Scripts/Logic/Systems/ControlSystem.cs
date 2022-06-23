@@ -15,21 +15,6 @@ namespace TicTacToe.Logic.Systems
 
             var world = systems.GetWorld();
 
-            var eventsQueue = sharedData.EventsManager.InputEvents;
-
-            if (eventsQueue.TryDequeue(out var result))
-            {
-                switch (result)
-                {
-                    case RestartEvent:
-                    {
-                        var restartEvents = world.GetPool<RestartEvent>();
-                        restartEvents.Add(world.NewEntity());
-                        break;
-                    }
-                }
-            }
-
             if (sharedData.GameState.State != State.Playing)
             {
                 return;

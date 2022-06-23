@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe.Interfaces
 {
-    public interface IEvent
+    public interface IMessage
     {
     }
 }

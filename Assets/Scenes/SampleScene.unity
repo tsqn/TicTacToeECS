@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 505648963}
   - component: {fileID: 505648964}
   m_Layer: 0
-  m_Name: EventsManager
+  m_Name: MessagesBridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configuration: {fileID: 11400000, guid: 7369a231d18dbb249af301c776c92932, type: 2}
   _sceneData: {fileID: 32103003}
-  _eventsManager: {fileID: 505648964}
+  _messagesBridge: {fileID: 505648964}
 --- !u!1 &1387857507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 2053922433}
-  _eventsManager: {fileID: 505648964}
+  _messagesBridge: {fileID: 505648964}
 --- !u!1 &2053922431
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ namespace TicTacToe.Logic.Systems
 
                 if (chainLength >= configuration.ChainLength)
                 {
-                    world.GetPool<GameOverEvent>().Add(world.NewEntity()).Result =
+                    world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result =
                         world.GetPool<Sign>().Get(id).Type switch
                         {
                             SignType.None => throw new ArgumentOutOfRangeException(),
@@ -43,7 +43,7 @@ namespace TicTacToe.Logic.Systems
                 }
                 else if (cellsFilter.GetEntitiesCount() == 0)
                 {
-                    world.GetPool<GameOverEvent>().Add(world.NewEntity()).Result = SignType.None;
+                    world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result = SignType.None;
                 }
 
                 eventPool.Del(id);

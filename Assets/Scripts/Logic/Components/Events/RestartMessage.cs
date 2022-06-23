@@ -2,7 +2,7 @@
 
 namespace TicTacToe.Logic.Components.Events
 {
-    public struct RestartEvent : IEvent
+    public struct RestartMessage : IMessage
     {
     }
 }

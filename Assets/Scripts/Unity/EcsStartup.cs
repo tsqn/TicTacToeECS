@@ -3,6 +3,7 @@ using Leopotam.EcsLite.Di;
 using TicTacToe.Logic.Systems;
 using TicTacToe.Unity.Decorators;
 using UnityEngine;
+using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using Leopotam.EcsLite.UnityEditor;
 #endif
@@ -17,12 +18,13 @@ namespace TicTacToe.Unity
         [SerializeField]
         private SceneData _sceneData;
 
+        [FormerlySerializedAs("_eventsManager")]
         [SerializeField]
-        private EventsManager _eventsManager;
+        private MessagesBridge _messagesBridge;
 
         private EcsSystems _editorSystems;
 
-        private EventsResolver _eventsResolver;
+        private MessageResolver _messageResolver;
         private SharedData _sharedData;
         private EcsSystems _systems;
         private EcsWorld _world;
@@ -36,12 +38,12 @@ namespace TicTacToe.Unity
                 SceneData = _sceneData,
                 Input = new InputDecorator(),
                 Physics = new PhysicsDecorator(),
-                EventsManager = _eventsManager
+                EventsManager = _messagesBridge
             };
 
-            _eventsResolver = new EventsResolver
+            _messageResolver = new MessageResolver
             {
-                EventsManager = _eventsManager,
+                MessagesBridge = _messagesBridge,
                 WinScreen = _sceneData.UI.WinScreen
             };
 
@@ -59,6 +61,7 @@ namespace TicTacToe.Unity
             };
 
             _systems
+                .Add(new MessagesSystem())
                 .Add(new InitializeFieldSystem())
                 .Add(new CreateCellViewSystem())
                 .Add(new SetCameraSystem())
@@ -80,7 +83,7 @@ namespace TicTacToe.Unity
 #if UNITY_EDITOR
             _editorSystems.Run();
 #endif
-            _eventsResolver.Update();
+            _messageResolver.Update();
         }
 
         private void OnDestroy()

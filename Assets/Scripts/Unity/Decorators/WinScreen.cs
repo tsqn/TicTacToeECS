@@ -12,7 +12,7 @@ namespace TicTacToe.Unity.Decorators
         private Text _text;
 
         [SerializeField]
-        private EventsManager _eventsManager;
+        private MessagesBridge _messagesBridge;
 
         public void SetWinner(SignType winnerType)
         {
@@ -28,7 +28,7 @@ namespace TicTacToe.Unity.Decorators
 
         public void OnRestartClick()
         {
-            _eventsManager.InputEvents.Enqueue(new RestartEvent());
+            _messagesBridge.InputEvents.Enqueue(new RestartMessage());
             Hide();
         }
     }

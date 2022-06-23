@@ -16,7 +16,7 @@ namespace TicTacToe.Logic.Systems
 
             var sharedData = systems.GetShared<ISharedData>();
 
-            var gameOverEvent = world.Filter<GameOverEvent>().End();
+            var gameOverEvent = world.Filter<GameOverMessage>().End();
 
             if (gameOverEvent.GetEntitiesCount() == 0)
             {
@@ -24,14 +24,14 @@ namespace TicTacToe.Logic.Systems
             }
 
             var gameOverEntity = gameOverEvent.GetRawEntities()[0];
-            sharedData.EventsManager.OutputEvents.Enqueue(new GameOverEvent()
+            sharedData.EventsManager.OutputEvents.Enqueue(new GameOverMessage()
             {
-                Result = world.GetPool<GameOverEvent>().Get(gameOverEntity).Result 
+                Result = world.GetPool<GameOverMessage>().Get(gameOverEntity).Result 
             });
                 
             sharedData.GameState.State = State.GameOver;
             
-            world.GetPool<GameOverEvent>().Del(gameOverEntity);
+            world.GetPool<GameOverMessage>().Del(gameOverEntity);
         }
     }
 }
