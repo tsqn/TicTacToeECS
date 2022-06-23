@@ -3,6 +3,7 @@ using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
 {
@@ -11,9 +12,6 @@ namespace TicTacToe.Logic.Systems
         public void Run(EcsSystems systems)
         {
             var sharedData = systems.GetShared<ISharedData>();
-            var sceneData = sharedData.SceneData;
-
-            var world = systems.GetWorld();
 
             if (sharedData.GameState.State != State.Playing)
             {
@@ -22,25 +20,11 @@ namespace TicTacToe.Logic.Systems
 
             if (sharedData.Input.GetMouseButtonDown(0))
             {
-                var camera = sceneData.Camera;
-
-                var ray = camera.ScreenPointToRay(sharedData.Input.MousePosition);
-
-                if (sharedData.Physics.Raycast(ray, out var hitInfo))
+                sharedData.EventsManager.OutputMessages.Enqueue(new RequestScreenPointToRayMessage()
                 {
-                    var cellView = (ICellView) hitInfo.Collider.GetComponent<ICellView>();
-
-                    if (cellView != null)
-                    {
-                        var clickedPool = world.GetPool<ClickedEvent>();
-                        var takenPool = world.GetPool<Sign>();
-
-                        if (!takenPool.Has(cellView.Entity))
-                        {
-                            clickedPool.Add(cellView.Entity);
-                        }
-                    }
-                }
+                    Position = sharedData.Input.MousePosition
+                });;
+              
             }
         }
     }

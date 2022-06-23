@@ -28,7 +28,7 @@ namespace TicTacToe.Unity.Decorators
 
         public void OnRestartClick()
         {
-            _messagesBridge.InputEvents.Enqueue(new RestartMessage());
+            _messagesBridge.InputMessages.Enqueue(new RestartMessage());
             Hide();
         }
     }

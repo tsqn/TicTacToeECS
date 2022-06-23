@@ -3,6 +3,7 @@ using Leopotam.EcsLite.Di;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
 {
@@ -24,7 +25,7 @@ namespace TicTacToe.Logic.Systems
             }
 
             var gameOverEntity = gameOverEvent.GetRawEntities()[0];
-            sharedData.EventsManager.OutputEvents.Enqueue(new GameOverMessage()
+            sharedData.EventsManager.OutputMessages.Enqueue(new GameOverMessage()
             {
                 Result = world.GetPool<GameOverMessage>().Get(gameOverEntity).Result 
             });

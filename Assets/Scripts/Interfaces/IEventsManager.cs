@@ -4,7 +4,7 @@ namespace TicTacToe.Interfaces
 {
     public interface IEventsManager
     {
-        Queue<IMessage> InputEvents { get; set; }
-        Queue<IMessage> OutputEvents { get; set; }
+        Queue<IMessage> InputMessages { get; set; }
+        Queue<IMessage> OutputMessages { get; set; }
     }
 }

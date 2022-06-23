@@ -2,6 +2,7 @@ using System.Numerics;
 using Leopotam.EcsLite;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
 {
@@ -10,27 +11,26 @@ namespace TicTacToe.Logic.Systems
         public void Run(EcsSystems systems)
         {
             var sharedData = systems.GetShared<ISharedData>();
-            var sceneData = sharedData.SceneData;
             var configuration = sharedData.Configuration;
 
             var world = systems.GetWorld();
 
-            var cellsFilter = world.Filter<UpdateCameraEvent>().End();
+            var filter = world.Filter<UpdateCameraEvent>().End();
             var updateCameraEvents = world.GetPool<UpdateCameraEvent>();
 
-            foreach (var id in cellsFilter)
+            foreach (var id in filter)
             {
-                var height = configuration.LevelHeight;
+                var levelHeight = configuration.LevelHeight;
+                var levelWidth = configuration.LevelWidth;
+                var offset = configuration.Offset;
 
-                var camera = sceneData.Camera;
-                camera.Orthographic = true;
-                camera.OrthographicSize = height / 1.5f + (height - 1) * configuration.Offset.Y / 1.5f;
-
-                sceneData.CameraTransform.Position = new Vector3(
-                    configuration.LevelWidth / 2f + (configuration.LevelWidth - 1) * configuration.Offset.Y / 2,
-                    configuration.LevelHeight / 2f + (configuration.LevelHeight - 1) * configuration.Offset.Y / 2,
-                    -1);
-
+                sharedData.EventsManager.OutputMessages.Enqueue(new ApplyCameraSettingsMessage
+                {
+                    Orthographic = true,
+                    OrthographicSize = levelHeight / 1.5f + (levelHeight - 1) * offset.Y / 1.5f,
+                    Position = new Vector3(levelWidth / 2f + (levelWidth - 1) * offset.Y / 2,
+                        levelHeight / 2f + (levelHeight - 1) * offset.Y / 2, -1)
+                });
                 updateCameraEvents.Del(id);
             }
         }
