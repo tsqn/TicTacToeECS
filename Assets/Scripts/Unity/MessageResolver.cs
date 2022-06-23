@@ -9,10 +9,10 @@ namespace TicTacToe.Unity
     {
         public MessagesBridge MessagesBridge;
         public WinScreen WinScreen;
-        
+
         public void Update()
         {
-            if (MessagesBridge.OutputEvents.TryDequeue(out var result))
+            while (MessagesBridge.OutputEvents.TryDequeue(out var result))
             {
                 Debug.Log($"{result.GetType()} event occured.");
                 switch (result)
