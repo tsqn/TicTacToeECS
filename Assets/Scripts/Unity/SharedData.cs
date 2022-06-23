@@ -8,6 +8,5 @@ namespace TicTacToe.Unity
         public IConfiguration Configuration { get; set; }
         public IInput Input { get; set; }
         public IEventsManager EventsManager { get; set; }
-        public IPhysics Physics { get; set; }
     }
 }

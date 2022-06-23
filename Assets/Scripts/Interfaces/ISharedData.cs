@@ -6,6 +6,5 @@
         IConfiguration Configuration { get; }
         IInput Input { get; set; }
         IEventsManager EventsManager { get; set; }
-        IPhysics Physics { get; set; }
     }
 }

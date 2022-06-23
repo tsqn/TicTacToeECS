@@ -36,7 +36,6 @@ namespace TicTacToe.Unity
                 Configuration = _configuration,
                 GameState = new GameState(),
                 Input = new InputDecorator(),
-                Physics = new PhysicsDecorator(),
                 EventsManager = _messagesBridge
             };
 
