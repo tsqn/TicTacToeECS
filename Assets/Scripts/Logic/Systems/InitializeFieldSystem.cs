@@ -18,6 +18,7 @@ namespace TicTacToe.Logic.Systems
 
             var cellComponents = world.GetPool<Cell>();
             var positionComponents = world.GetPool<CellPosition>();
+            
 
             for (var x = 0; x < configuration.LevelWidth; x++)
             {

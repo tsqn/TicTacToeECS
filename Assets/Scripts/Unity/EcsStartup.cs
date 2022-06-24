@@ -42,7 +42,8 @@ namespace TicTacToe.Unity
             _messageResolver = new MessageResolver
             {
                 MessagesBridge = _messagesBridge,
-                WinScreen = _sceneData.UI.WinScreen
+                WinScreen = _sceneData.UI.WinScreen,
+                Configuration = _configuration
             };
 
             _world = new EcsWorld();
@@ -62,10 +63,10 @@ namespace TicTacToe.Unity
                 .Add(new MessagesSystem())
                 .Add(new InitializeFieldSystem())
                 .Add(new CreateCellViewSystem())
+                .Add(new CreateSignViewSystem())
                 .Add(new SetCameraSystem())
                 .Add(new ControlSystem())
                 .Add(new AnalyzeClickSystem())
-                .Add(new CreateSignViewSystem())
                 .Add(new CheckWinSystem())
                 .Add(new GameOverSystem())
                 .Add(new RestartSystem())

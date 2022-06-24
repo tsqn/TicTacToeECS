@@ -29,12 +29,12 @@ namespace TicTacToe.Unity
         [SerializeField]
         private SignView _ringView;
 
-        public ICellView CellView => _cellView;
+        public CellView CellView => _cellView;
         public System.Numerics.Vector2 Offset => _offset.Convert();
         public int LevelWidth => _levelWidth;
         public int LevelHeight => _levelHeight;
         public int ChainLength => _chainLength;
-        public ISignView CrossView => _crossView;
-        public ISignView RingView => _ringView;
+        public SignView CrossView => _crossView;
+        public SignView RingView => _ringView;
     }
 }

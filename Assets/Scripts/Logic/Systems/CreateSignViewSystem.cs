@@ -1,9 +1,10 @@
 ﻿using System;
 using Leopotam.EcsLite;
-using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
-using TicTacToe.Logic.Components.Refs;
+using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Components.Tags;
+using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
 {
@@ -14,32 +15,25 @@ namespace TicTacToe.Logic.Systems
             var world = systems.GetWorld();
 
             var sharedData = systems.GetShared<ISharedData>();
-            var configuration = sharedData.Configuration;
 
+            var filter = world.Filter<ClickedEvent>().End();
 
-            var filter = world.Filter<Sign>().Inc<CellViewRef>().Exc<SignViewRef>().End();
+            var taken = world.GetPool<Taken>();
+            var positions = world.GetPool<Position>();
 
-            var signed = world.GetPool<Sign>();
-            var cellViewRefs = world.GetPool<CellViewRef>();
-            var takenViewRefs = world.GetPool<SignViewRef>();
-
+            
             foreach (var id in filter)
             {
-                ref var cellViewRef = ref cellViewRefs.Get(id);
-                var position = cellViewRef.View.Position;
-                ref var takenComponent = ref signed.Get(id);
-                var taken = takenComponent.Type;
-
-                var sigView = taken switch
+                ref var position = ref positions.Get(id);
+                
+                sharedData.EventsManager.OutputMessages.Enqueue(new InstantiateSignViewMessage()
                 {
-                    SignType.Cross => configuration.CrossView,
-                    SignType.Ring => configuration.RingView,
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-
-                var instance = sigView.Instantiate(id, position);
-                ref var takenViewRef = ref takenViewRefs.Add(id);
-                takenViewRef.View = (ISignView) instance;
+                    Id = id,
+                    Position = position.Value,
+                    SignType = sharedData.GameState.CurrentSign
+                });
+                
+                taken.Add(id);
             }
         }
     }
