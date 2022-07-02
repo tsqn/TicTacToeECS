@@ -23,7 +23,6 @@ namespace TicTacToe.Logic.Extensions
 
             var startType = takenPool.Get(startEntity).Type;
 
-
             var horizontalLength = CheckLine(ecsWorld, cells, position, startType, new Vector2(1, 0));
             var verticalLength = CheckLine(ecsWorld, cells, position, startType, new Vector2(0, 1));
             var firstDiagonalLength = CheckLine(ecsWorld, cells, position, startType, new Vector2(1, 1));
@@ -58,7 +57,6 @@ namespace TicTacToe.Logic.Extensions
                 {
                     break;
                 }
-
 
                 var type = takenPool.Get(entity).Type;
 
