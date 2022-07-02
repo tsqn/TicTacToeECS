@@ -30,7 +30,7 @@ namespace TicTacToe.Unity.Resolvers
                         InstantiationResolver.Instantiate(Configuration.CellView, message);
                         break;
                     case InstantiateSignViewMessage message:
-                        InstantiationResolver.InstantiateSign(message, Configuration.RingView, Configuration.CrossView);
+                        InstantiationResolver.InstantiateSign(message, Configuration.CrossView, Configuration.RingView);
                         break;
                     
                     case DeleteSignMessage message:
