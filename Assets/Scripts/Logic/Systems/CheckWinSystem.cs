@@ -24,7 +24,7 @@ namespace TicTacToe.Logic.Systems
             var eventPool = world.GetPool<CheckWinEvent>();
 
             var cellsFilter = world.Filter<Cell>().Exc<Sign>().End();
-            
+
             foreach (var id in filter)
             {
                 ref var position = ref positions.Get(id);
@@ -33,24 +33,32 @@ namespace TicTacToe.Logic.Systems
 
                 if (chainLength >= configuration.ChainLength)
                 {
-                    world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result =
-                        world.GetPool<Sign>().Get(id).Type switch
-                        {
-                            SignType.None => throw new ArgumentOutOfRangeException(),
-                            SignType.Cross => SignType.Cross,
-                            SignType.Ring => SignType.Ring,
-                            _ => throw new ArgumentOutOfRangeException()
-                        };
+                    Win(world, id);
                 }
                 else if (cellsFilter.GetEntitiesCount() == 0)
                 {
-                    world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result = SignType.None;
+                    Draw(world);
                 }
 
                 eventPool.Del(id);
             }
-            
-         
+        }
+
+        private static void Draw(EcsWorld world)
+        {
+            world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result = SignType.None;
+        }
+
+        private static void Win(EcsWorld world, int id)
+        {
+            world.GetPool<GameOverMessage>().Add(world.NewEntity()).Result =
+                world.GetPool<Sign>().Get(id).Type switch
+                {
+                    SignType.None => throw new ArgumentOutOfRangeException(),
+                    SignType.Cross => SignType.Cross,
+                    SignType.Ring => SignType.Ring,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
         }
     }
 }
