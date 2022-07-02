@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Numerics;
 using Leopotam.EcsLite;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
+using TicTacToe.Logic.Components.Tags;
 using TicTacToe.Logic.Extensions;
 using TicTacToe.Logic.Messages;
 
@@ -18,24 +21,42 @@ namespace TicTacToe.Logic.Systems
             var sharedData = systems.GetShared<ISharedData>();
             var configuration = sharedData.Configuration;
 
-            var filter = world.Filter<CellPosition>().Inc<Sign>().Inc<CheckWinEvent>().End();
+            var newToSignFilter = world.Filter<CellPosition>().Inc<Sign>().Inc<CheckWinEvent>().End();
+            var alreadySignedFilter = world.Filter<CellPosition>().Inc<Sign>().End();
+            var cellsPositionFilter = world.Filter<CellPosition>().End();
 
             var positions = world.GetPool<CellPosition>();
+            var signs = world.GetPool<Sign>();
             var eventPool = world.GetPool<CheckWinEvent>();
 
-            var cellsFilter = world.Filter<Cell>().Exc<Sign>().End();
-
-            foreach (var id in filter)
+            foreach (var id in newToSignFilter)
             {
-                ref var position = ref positions.Get(id);
+                ref var newSignPosition = ref positions.Get(id);
 
-                var chainLength = sharedData.GameState.Cells.GetLongestChain(world, position.Value);
+                var signedCells = new Dictionary<Vector2, SignType>();
+
+                foreach (var cellPositionId in cellsPositionFilter)
+                {
+                    ref var cellPosition = ref positions.Get(cellPositionId);
+                    
+                    signedCells.Add(cellPosition.Value, SignType.None);
+                }
+
+                foreach (var alreadySignedId in alreadySignedFilter)
+                {
+                    ref var sign = ref signs.Get(alreadySignedId);
+                    ref var position = ref positions.Get(alreadySignedId);
+
+                    signedCells[position.Value] = sign.Type;
+                }
+
+                var chainLength = signedCells.GetLongestChain(newSignPosition.Value);
 
                 if (chainLength >= configuration.ChainLength)
                 {
                     Win(world, id);
                 }
-                else if (cellsFilter.GetEntitiesCount() == 0)
+                else if (cellsPositionFilter.GetEntitiesCount() == 0)
                 {
                     Draw(world);
                 }

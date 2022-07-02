@@ -14,11 +14,9 @@ namespace TicTacToe.Editor.Tests
         [Test]
         public void CheckHorizontalChainZero()
         {
-            var world = new EcsWorld();
+            var cells = CreateTestCells();
 
-            var cells = CreateTestCells(world);
-
-            var chainLenght = cells.GetLongestChain(world, Vector2.Zero);
+            var chainLenght = cells.GetLongestChain(Vector2.Zero);
 
             Assert.AreEqual(0, chainLenght);
         }
@@ -28,12 +26,11 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
+            var cells = CreateTestCells();
 
-            var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[Vector2.Zero]).Type = SignType.Cross;
+            cells[Vector2.Zero] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, Vector2.Zero);
+            var chainLenght = cells.GetLongestChain(Vector2.Zero);
 
             Assert.AreEqual(1, chainLenght);
         }
@@ -43,13 +40,12 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
+            var cells = CreateTestCells();
 
-            var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
+            cells[new Vector2(2, 0)] = SignType.Cross;
+            cells[new Vector2(1, 0)] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, new Vector2(2, 0));
+            var chainLenght = cells.GetLongestChain(new Vector2(2, 0));
 
             Assert.AreEqual(2, chainLenght);
         }
@@ -59,13 +55,13 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
+            var cells = CreateTestCells();
 
             var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(1, 0)]).Type = SignType.Cross;
+            cells[new Vector2(2, 0)] = SignType.Cross;
+            cells[new Vector2(1, 0)] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 0));
+            var chainLenght = cells.GetLongestChain(new Vector2(1, 0));
 
 
             Assert.AreEqual(2, chainLenght);
@@ -76,14 +72,13 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
+            var cells = CreateTestCells();
 
-            var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(0, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
+            cells[new Vector2(0, 2)] = SignType.Cross;
+            cells[new Vector2(0, 1)] = SignType.Cross;
+            cells[new Vector2(0, 0)] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, new Vector2(0, 1));
+            var chainLenght = cells.GetLongestChain(new Vector2(0, 1));
 
             Assert.AreEqual(3, chainLenght);
         }
@@ -93,14 +88,13 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
+            var cells = CreateTestCells();
 
-            var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[new Vector2(2, 2)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(0, 0)]).Type = SignType.Cross;
+            cells[new Vector2(2, 2)] = SignType.Cross;
+            cells[new Vector2(1, 1)] = SignType.Cross;
+            cells[new Vector2(0, 0)] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
+            var chainLenght = cells.GetLongestChain(new Vector2(1, 1));
 
             Assert.AreEqual(3, chainLenght);
         }
@@ -110,30 +104,29 @@ namespace TicTacToe.Editor.Tests
         {
             var world = new EcsWorld();
 
-            var cells = CreateTestCells(world);
-            var takenPool = world.GetPool<Sign>();
-            takenPool.Add(cells[new Vector2(2, 0)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(1, 1)]).Type = SignType.Cross;
-            takenPool.Add(cells[new Vector2(0, 2)]).Type = SignType.Cross;
+            var cells = CreateTestCells();
+            cells[new Vector2(2, 0)] = SignType.Cross;
+            cells[new Vector2(1, 1)] = SignType.Cross;
+            cells[new Vector2(0, 2)] = SignType.Cross;
 
-            var chainLenght = cells.GetLongestChain(world, new Vector2(1, 1));
+            var chainLenght = cells.GetLongestChain(new Vector2(1, 1));
 
             Assert.AreEqual(3, chainLenght);
         }
 
-        private static Dictionary<Vector2, int> CreateTestCells(EcsWorld world)
+        private static Dictionary<Vector2, SignType> CreateTestCells()
         {
-            return new Dictionary<Vector2, int>
+            return new Dictionary<Vector2, SignType>
             {
-                {new Vector2(0, 0), CreateCell(world, new Vector2(0, 0))},
-                {new Vector2(0, 1), CreateCell(world, new Vector2(0, 1))},
-                {new Vector2(0, 2), CreateCell(world, new Vector2(0, 2))},
-                {new Vector2(1, 0), CreateCell(world, new Vector2(1, 0))},
-                {new Vector2(1, 1), CreateCell(world, new Vector2(1, 1))},
-                {new Vector2(1, 2), CreateCell(world, new Vector2(1, 2))},
-                {new Vector2(2, 0), CreateCell(world, new Vector2(2, 0))},
-                {new Vector2(2, 1), CreateCell(world, new Vector2(2, 1))},
-                {new Vector2(2, 2), CreateCell(world, new Vector2(2, 2))}
+                {new Vector2(0, 0), SignType.None},
+                {new Vector2(0, 1), SignType.None},
+                {new Vector2(0, 2), SignType.None},
+                {new Vector2(1, 0), SignType.None},
+                {new Vector2(1, 1), SignType.None},
+                {new Vector2(1, 2), SignType.None},
+                {new Vector2(2, 0), SignType.None},
+                {new Vector2(2, 1), SignType.None},
+                {new Vector2(2, 2), SignType.None}
             };
         }
 
