@@ -10,7 +10,6 @@ namespace TicTacToe.Logic.Extensions
             logger.Value.Debug(message);
         }
 
-
         public static void Error(this EcsCustomInject<ILogger> logger, object message)
         {
             logger.Value.Error(message);

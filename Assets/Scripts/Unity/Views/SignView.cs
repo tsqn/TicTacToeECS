@@ -1,6 +1,4 @@
-﻿using TicTacToe.Interfaces;
-using TicTacToe.Unity.Decorators;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TicTacToe.Unity.Views
 {
@@ -8,7 +6,7 @@ namespace TicTacToe.Unity.Views
     {
         [SerializeField]
         private int _entityId;
-        
+
         public int EntityId
         {
             get => _entityId;

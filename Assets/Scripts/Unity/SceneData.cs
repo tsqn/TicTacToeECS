@@ -1,5 +1,3 @@
-using TicTacToe.Interfaces;
-using TicTacToe.Unity.Decorators;
 using UnityEngine;
 
 namespace TicTacToe.Unity

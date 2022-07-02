@@ -1,8 +1,6 @@
 using Leopotam.EcsLite;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
-using TicTacToe.Logic.Components;
-using TicTacToe.Logic.Components.Events;
 using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
@@ -20,11 +18,10 @@ namespace TicTacToe.Logic.Systems
 
             if (sharedData.Input.GetMouseButtonDown(0))
             {
-                sharedData.EventsManager.OutputMessages.Enqueue(new RequestScreenPointToRayMessage()
+                sharedData.EventsManager.OutputMessages.Enqueue(new RequestScreenPointToRayMessage
                 {
                     Position = sharedData.Input.MousePosition
-                });;
-              
+                });
             }
         }
     }

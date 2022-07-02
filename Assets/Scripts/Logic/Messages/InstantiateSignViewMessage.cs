@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using TicTacToe.Core;
 using TicTacToe.Interfaces;
-using TicTacToe.Logic.Components;
 
 namespace TicTacToe.Logic.Messages
 {

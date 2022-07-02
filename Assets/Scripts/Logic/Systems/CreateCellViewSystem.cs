@@ -2,7 +2,6 @@ using System.Numerics;
 using Leopotam.EcsLite;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
-using TicTacToe.Logic.Components.Tags;
 using TicTacToe.Logic.Messages;
 
 namespace TicTacToe.Logic.Systems
