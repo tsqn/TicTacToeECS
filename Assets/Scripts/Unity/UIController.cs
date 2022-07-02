@@ -1,5 +1,4 @@
-﻿using TicTacToe.Unity.Decorators;
-using TicTacToe.Unity.UI;
+﻿using TicTacToe.Unity.UI;
 using UnityEngine;
 
 namespace TicTacToe.Unity
