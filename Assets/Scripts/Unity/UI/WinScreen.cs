@@ -25,8 +25,13 @@ namespace TicTacToe.Unity.UI
 
         public void OnRestartClick()
         {
-            MessagesBridge.Instance.InputMessages.Enqueue(new RestartMessage());
+            Restart();
             Hide();
+        }
+
+        private static void Restart()
+        {
+            MessagesBridge.Instance.InputMessages.Enqueue(new RestartMessage());
         }
     }
 }

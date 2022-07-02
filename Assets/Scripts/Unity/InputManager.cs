@@ -17,19 +17,24 @@ namespace TicTacToe.Unity
         {
             if (LeftMouseButtonClicked)
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                TryHitCell();
+            }
+        }
 
-                if (Physics.Raycast(ray, out var hitInfo))
+        private void TryHitCell()
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out var hitInfo))
+            {
+                var cellView = hitInfo.collider.GetComponent<CellView>();
+
+                if (cellView != null)
                 {
-                    var cellView = hitInfo.collider.GetComponent<CellView>();
-
-                    if (cellView != null)
+                    _messagesBridge.InputMessages.Enqueue(new ClickedCellViewMessage
                     {
-                        _messagesBridge.InputMessages.Enqueue(new ClickedCellViewMessage
-                        {
-                            Entity = cellView.EntityId
-                        });
-                    }
+                        Entity = cellView.EntityId
+                    });
                 }
             }
         }
