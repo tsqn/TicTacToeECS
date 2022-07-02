@@ -12,10 +12,9 @@ namespace TicTacToe.Logic.Systems
         {
             var world = systems.GetWorld();
             var sharedData = systems.GetShared<ISharedData>();
-            var filter = world.Filter<Sign>().Inc<Taken>().Inc<DeleteTag>().End();
+            var filter = world.Filter<Sign>().Inc<DeleteTag>().End();
 
             var signCells = world.GetPool<Sign>();
-            var signViewRefs = world.GetPool<Taken>();
             var deleteTags = world.GetPool<DeleteTag>();
 
             foreach (var id in filter)
@@ -25,7 +24,6 @@ namespace TicTacToe.Logic.Systems
                     Id = id
                 });
                 signCells.Del(id);
-                signViewRefs.Del(id);
                 deleteTags.Del(id);
             }
         }

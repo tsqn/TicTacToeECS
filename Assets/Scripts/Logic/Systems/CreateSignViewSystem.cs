@@ -17,9 +17,7 @@ namespace TicTacToe.Logic.Systems
 
             var filter = world.Filter<ClickedEvent>().End();
 
-            var taken = world.GetPool<Taken>();
             var positions = world.GetPool<Position>();
-
             
             foreach (var id in filter)
             {
@@ -32,7 +30,6 @@ namespace TicTacToe.Logic.Systems
                     SignType = sharedData.GameState.CurrentSign
                 });
                 
-                taken.Add(id);
             }
         }
     }
