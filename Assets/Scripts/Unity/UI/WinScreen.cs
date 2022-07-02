@@ -4,7 +4,7 @@ using TicTacToe.Logic.Components.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TicTacToe.Unity.Decorators
+namespace TicTacToe.Unity.UI
 {
     public class WinScreen : Screen
     {

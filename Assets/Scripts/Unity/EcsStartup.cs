@@ -42,7 +42,7 @@ namespace TicTacToe.Unity
             _messageResolver = new MessageResolver
             {
                 MessagesBridge = _messagesBridge,
-                WinScreen = _sceneData.UI.WinScreen,
+                WinScreen = _sceneData.UIController.WinScreen,
                 Configuration = _configuration
             };
 

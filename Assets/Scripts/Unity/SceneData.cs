@@ -6,8 +6,8 @@ namespace TicTacToe.Unity
     {
 
         [SerializeField]
-        private UI _ui;
+        private UIController _uiController;
 
-        public UI UI => _ui;
+        public UIController UIController => _uiController;
     }
 }

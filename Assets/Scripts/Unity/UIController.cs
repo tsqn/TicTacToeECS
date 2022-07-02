@@ -1,9 +1,10 @@
 ﻿using TicTacToe.Unity.Decorators;
+using TicTacToe.Unity.UI;
 using UnityEngine;
 
 namespace TicTacToe.Unity
 {
-    public class UI : MonoBehaviour
+    public class UIController : MonoBehaviour
     {
         [SerializeField]
         private WinScreen _winScreen;

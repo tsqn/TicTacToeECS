@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using TicTacToe.Core;
 using TicTacToe.Logic.Messages;
-using TicTacToe.Unity.Decorators;
 using TicTacToe.Unity.Extensions;
+using TicTacToe.Unity.UI;
 using TicTacToe.Unity.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
