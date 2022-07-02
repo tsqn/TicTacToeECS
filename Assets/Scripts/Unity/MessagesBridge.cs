@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
 using TicTacToe.Interfaces;
-using UnityEngine;
 
 namespace TicTacToe.Unity
 {
-    public class MessagesBridge : MonoBehaviour, IEventsManager
+    public class MessagesBridge : IEventsManager
     {
-        public void Awake()
+        private MessagesBridge()
         {
-            InputMessages = new Queue<IMessage>();
-            OutputMessages = new Queue<IMessage>();
+            
         }
 
-        public Queue<IMessage> OutputMessages { get; set; }
-        public Queue<IMessage> InputMessages { get; set; }
+        private static MessagesBridge _instance;
+        public static MessagesBridge Instance => _instance ??= new MessagesBridge();
+
+        public Queue<IMessage> OutputMessages { get; set; } = new();
+        public Queue<IMessage> InputMessages { get; set; } = new();
     }
 }

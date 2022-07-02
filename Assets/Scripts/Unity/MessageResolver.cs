@@ -4,7 +4,6 @@ using TicTacToe.Core;
 using TicTacToe.Logic.Messages;
 using TicTacToe.Unity.Extensions;
 using TicTacToe.Unity.UI;
-using TicTacToe.Unity.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Object = UnityEngine.Object;
@@ -39,26 +38,6 @@ namespace TicTacToe.Unity
                         camera.transform.position = message.Position.Convert();
 
                         break;
-
-                    case RequestScreenPointToRayMessage message:
-
-                        var ray = Camera.main.ScreenPointToRay(message.Position.Convert());
-
-                        if (Physics.Raycast(ray, out var hitInfo))
-                        {
-                            var cellView = hitInfo.collider.GetComponent<CellView>();
-
-                            if (cellView != null)
-                            {
-                                MessagesBridge.InputMessages.Enqueue(new ClickedCellViewMessage
-                                {
-                                    Entity = cellView.EntityId
-                                });
-                            }
-                        }
-
-                        break;
-
                     case InstantiateCellViewMessage message:
 
                         var newCellView = Object.Instantiate(Configuration.CellView, message.Position.Convert(),

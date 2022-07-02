@@ -1,9 +1,7 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using TicTacToe.Logic.Systems;
-using TicTacToe.Unity.Decorators;
 using UnityEngine;
-using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using Leopotam.EcsLite.UnityEditor;
 #endif
@@ -18,12 +16,11 @@ namespace TicTacToe.Unity
         [SerializeField]
         private SceneData _sceneData;
 
-        [FormerlySerializedAs("_eventsManager")]
-        [SerializeField]
         private MessagesBridge _messagesBridge;
 
         private EcsSystems _editorSystems;
 
+        private InputManager _inputManager;
         private MessageResolver _messageResolver;
         private SharedData _sharedData;
         private EcsSystems _systems;
@@ -31,14 +28,16 @@ namespace TicTacToe.Unity
 
         private void Start()
         {
+            _messagesBridge = MessagesBridge.Instance;
+            _inputManager = new InputManager(_messagesBridge);
+
             _sharedData = new SharedData
             {
                 Configuration = _configuration,
                 GameState = new GameState(),
-                Input = new InputDecorator(),
-                EventsManager = _messagesBridge
+                MessagesBridge = _messagesBridge
             };
-
+            
             _messageResolver = new MessageResolver
             {
                 MessagesBridge = _messagesBridge,
@@ -65,7 +64,6 @@ namespace TicTacToe.Unity
                 .Add(new CreateCellViewSystem())
                 .Add(new CreateSignViewSystem())
                 .Add(new SetCameraSystem())
-                .Add(new ControlSystem())
                 .Add(new AnalyzeClickSystem())
                 .Add(new CheckWinSystem())
                 .Add(new GameOverSystem())
@@ -77,11 +75,13 @@ namespace TicTacToe.Unity
 
         private void Update()
         {
+
             _systems?.Run();
 
 #if UNITY_EDITOR
             _editorSystems.Run();
 #endif
+            _inputManager.Update();
             _messageResolver.Update();
         }
 

@@ -31,7 +31,7 @@ namespace TicTacToe.Logic.Systems
                 pos.Value = new Vector3(position.Value.X + configuration.Offset.X * position.Value.X,
                     position.Value.Y + configuration.Offset.Y * position.Value.Y, 0);
 
-                sharedData.EventsManager.OutputMessages.Enqueue(new InstantiateCellViewMessage()
+                sharedData.MessagesBridge.OutputMessages.Enqueue(new InstantiateCellViewMessage()
                 {
                     EntityId = index,
                     Position = pos.Value,

@@ -25,7 +25,7 @@ namespace TicTacToe.Logic.Systems
             {
                 ref var position = ref positions.Get(id);
                 
-                sharedData.EventsManager.OutputMessages.Enqueue(new InstantiateSignViewMessage()
+                sharedData.MessagesBridge.OutputMessages.Enqueue(new InstantiateSignViewMessage()
                 {
                     Id = id,
                     Position = position.Value,

@@ -24,7 +24,7 @@ namespace TicTacToe.Logic.Systems
                 var levelWidth = configuration.LevelWidth;
                 var offset = configuration.Offset;
 
-                sharedData.EventsManager.OutputMessages.Enqueue(new ApplyCameraSettingsMessage
+                sharedData.MessagesBridge.OutputMessages.Enqueue(new ApplyCameraSettingsMessage
                 {
                     Orthographic = true,
                     OrthographicSize = levelHeight / 1.5f + (levelHeight - 1) * offset.Y / 1.5f,

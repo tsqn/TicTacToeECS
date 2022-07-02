@@ -1,4 +1,5 @@
 ﻿using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using TicTacToe.Interfaces;
 using TicTacToe.Logic.Components;
 using TicTacToe.Logic.Components.Events;
@@ -8,14 +9,18 @@ namespace TicTacToe.Logic.Systems
 {
     public class MessagesSystem : IEcsRunSystem
     {
+        private EcsCustomInject<ILogger> _logger;
+
         public void Run(EcsSystems systems)
         {
             var sharedData = systems.GetShared<ISharedData>();
 
             var world = systems.GetWorld();
 
-            while (sharedData.EventsManager.InputMessages.TryDequeue(out var result))
+            while (sharedData.MessagesBridge.InputMessages.TryDequeue(out var result))
             {
+                _logger.Value.Debug($"{result.GetType()} message received");
+
                 switch (result)
                 {
                     case RestartMessage:
@@ -35,7 +40,7 @@ namespace TicTacToe.Logic.Systems
                         }
                         break;
                     }
-                }
+                    }
             }
         }
     }

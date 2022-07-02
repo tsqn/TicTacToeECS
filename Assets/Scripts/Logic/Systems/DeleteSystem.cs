@@ -20,7 +20,7 @@ namespace TicTacToe.Logic.Systems
 
             foreach (var id in filter)
             {
-                sharedData.EventsManager.OutputMessages.Enqueue(new DeleteSignMessage()
+                sharedData.MessagesBridge.OutputMessages.Enqueue(new DeleteSignMessage()
                 {
                     Id = id
                 });

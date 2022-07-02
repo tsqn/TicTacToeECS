@@ -6,7 +6,6 @@ namespace TicTacToe.Unity
     {
         public IGameState GameState { get; set; }
         public IConfiguration Configuration { get; set; }
-        public IInput Input { get; set; }
-        public IEventsManager EventsManager { get; set; }
+        public IEventsManager MessagesBridge { get; set; }
     }
 }

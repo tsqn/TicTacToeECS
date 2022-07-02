@@ -11,9 +11,6 @@ namespace TicTacToe.Unity.UI
         [SerializeField]
         private Text _text;
 
-        [SerializeField]
-        private MessagesBridge _messagesBridge;
-
         public void SetWinner(SignType winnerType)
         {
             _text.text = winnerType switch
@@ -28,7 +25,7 @@ namespace TicTacToe.Unity.UI
 
         public void OnRestartClick()
         {
-            _messagesBridge.InputMessages.Enqueue(new RestartMessage());
+            MessagesBridge.Instance.InputMessages.Enqueue(new RestartMessage());
             Hide();
         }
     }

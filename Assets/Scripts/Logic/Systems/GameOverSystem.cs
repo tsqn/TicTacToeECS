@@ -24,7 +24,7 @@ namespace TicTacToe.Logic.Systems
             }
 
             var gameOverEntity = gameOverEvent.GetRawEntities()[0];
-            sharedData.EventsManager.OutputMessages.Enqueue(new GameOverMessage()
+            sharedData.MessagesBridge.OutputMessages.Enqueue(new GameOverMessage()
             {
                 Result = world.GetPool<GameOverMessage>().Get(gameOverEntity).Result 
             });
