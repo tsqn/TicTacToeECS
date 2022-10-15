@@ -8,7 +8,7 @@ namespace TicTacToe.Logic.Systems
 {
     public class SetCameraSystem : IEcsRunSystem
     {
-        public void Run(EcsSystems systems)
+        public void Run(IEcsSystems systems)
         {
             var sharedData = systems.GetShared<ISharedData>();
             var configuration = sharedData.Configuration;

@@ -8,7 +8,7 @@ namespace TicTacToe.Logic.Systems
 {
     public class InitializeFieldSystem : IEcsInitSystem
     {
-        public void Init(EcsSystems systems)
+        public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
 

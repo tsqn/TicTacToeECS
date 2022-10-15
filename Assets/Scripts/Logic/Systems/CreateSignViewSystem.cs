@@ -9,7 +9,7 @@ namespace TicTacToe.Logic.Systems
 {
     public class CreateSignViewSystem : IEcsRunSystem
     {
-        public void Run(EcsSystems systems)
+        public void Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
 

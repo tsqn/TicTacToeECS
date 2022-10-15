@@ -8,7 +8,7 @@ namespace TicTacToe.Logic.Systems
 {
     public class AnalyzeClickSystem : IEcsRunSystem
     {
-        public void Run(EcsSystems systems)
+        public void Run(IEcsSystems systems)
         {
             var world = systems.GetWorld();
 

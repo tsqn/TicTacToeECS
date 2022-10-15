@@ -19,12 +19,12 @@ namespace TicTacToe.Unity
 
         private MessagesBridge _messagesBridge;
 
-        private EcsSystems _editorSystems;
+        private IEcsSystems _editorSystems;
 
         private InputManager _inputManager;
         private MessageResolver _messageResolver;
         private SharedData _sharedData;
-        private EcsSystems _systems;
+        private IEcsSystems _systems;
         private EcsWorld _world;
 
         private void Start()
@@ -100,7 +100,7 @@ namespace TicTacToe.Unity
         private void EditorSystemsInit()
         {
 #if UNITY_EDITOR
-            // create separate EcsSystems group for editor systems only.
+            // create separate IEcsSystems group for editor systems only.
             _editorSystems = new EcsSystems(_world);
             _editorSystems
                 .Add(new EcsWorldDebugSystem())
