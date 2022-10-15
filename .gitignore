@@ -176,3 +176,4 @@ sysinfo.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,rider,visualstudiocode
 .idea
+*.DS_Store
